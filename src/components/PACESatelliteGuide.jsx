@@ -8,27 +8,27 @@ const satelliteSteps = [
   {
     title: "Launch",
     content: "The Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
-    image: "src/assets/spaceship.jpg"
+    image: "spaceship.jpg"
   },
   {
     title: "Orbit",
     content: "PACE enters a Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
-    image: "src/assets/spaceship.jpg"
+    image: "spaceship.jpg"
   },
   {
     title: "Solar Panels",
     content: "The satellite deploys its solar panels to gather energy from the sun. nters a Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
-    image: "src/assets/spaceship.jpg"
+    image: "spaceship.jpg"
   },
   {
     title: "Data Collection",
     content: "PACE uses Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
-    image: "src/assets/spaceship.jpg"
+    image: "spaceship.jpg"
   },
   {
     title: "Data Transmission",
     content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
-    image: "src/assets/spaceship.jpg"
+    image: "spaceship.jpg"
   },
 ];
 
