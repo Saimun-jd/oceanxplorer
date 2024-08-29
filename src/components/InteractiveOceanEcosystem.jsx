@@ -228,9 +228,7 @@ const InteractiveOceanEcosystem = () => {
   const [selectedElement, setSelectedElement] = useState(null);
   const [hoveredElement, setHoveredElement] = useState(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(true);
-  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const [isDragging, setIsDragging] = useState(false); // Ensure isDragging is defined
   const imageRef = useRef(null);
   const containerRef = useRef(null);
   const navigate = useNavigate();
@@ -249,32 +247,19 @@ const InteractiveOceanEcosystem = () => {
         }
 
         const imgAspectRatio = imgNaturalWidth / imgNaturalHeight;
-        
-        setIsLargeScreen(containerWidth >= 1024);
 
         let width, height;
-        if (isLargeScreen) {
-          if (containerWidth / containerHeight > imgAspectRatio) {
-            width = containerWidth;
-            height = containerWidth / imgAspectRatio;
-          } else {
-            height = containerHeight;
-            width = containerHeight * imgAspectRatio;
-          }
+        if (containerWidth / containerHeight > imgAspectRatio) {
+          width = containerWidth;
+          height = containerWidth / imgAspectRatio;
         } else {
-          if (containerWidth / containerHeight > imgAspectRatio) {
-            height = containerHeight;
-            width = containerHeight * imgAspectRatio;
-          } else {
-            width = containerWidth;
-            height = containerWidth / imgAspectRatio;
-          }
+          height = containerHeight;
+          width = containerHeight * imgAspectRatio;
         }
 
-        setImageSize({ 
-          width: Math.round(width), 
-          height: Math.round(height) 
-        });
+        // Set image size to cover the viewport while maintaining aspect ratio
+        imageRef.current.style.width = `${width}px`;
+        imageRef.current.style.height = `${height}px`;
       }
     };
 
@@ -292,7 +277,7 @@ const InteractiveOceanEcosystem = () => {
       window.removeEventListener("resize", updateImageSize);
       if (img) img.onload = null;
     };
-  }, [isLargeScreen]);
+  }, []);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -304,7 +289,7 @@ const InteractiveOceanEcosystem = () => {
   }, []);
 
   const handleElementClick = (element) => {
-    if (!isDragging) {
+    if (!isDragging) { // Check if dragging is false
       setSelectedElement(element);
     }
   };
@@ -334,7 +319,7 @@ const InteractiveOceanEcosystem = () => {
   };
 
   return (
-    <div ref={containerRef} className="w-full h-full flex items-center justify-center overflow-hidden">
+    <div ref={containerRef} className="image-container">
       <ReactHowler
         src="/background.mp3"
         playing={isMusicPlaying}
@@ -345,13 +330,12 @@ const InteractiveOceanEcosystem = () => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative w-full h-full flex items-center justify-center"
+        className="relative"
         style={{
           touchAction: "none",
-          cursor: isLargeScreen ? "default" : "grab",
-          overflow: "hidden",
+          cursor: "grab",
         }}
-        drag={!isLargeScreen}
+        drag
         dragConstraints={containerRef}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
@@ -360,19 +344,9 @@ const InteractiveOceanEcosystem = () => {
           ref={imageRef}
           src="/pace2.png"
           alt="Ocean Ecosystem"
-          className="max-w-none max-h-none object-cover"
-          style={{
-            width: imageSize.width || '100%',
-            height: imageSize.height || '100%',
-          }}
+          className="object-cover"
         />
-        <div 
-          className="absolute inset-0"
-          style={{
-            width: imageSize.width || '100%',
-            height: imageSize.height || '100%',
-          }}
-        >
+        <div className="absolute inset-0">
           {elements.map((element) => (
             <HtmlTooltip
               key={element.id}
@@ -384,7 +358,7 @@ const InteractiveOceanEcosystem = () => {
               }
             >
               <motion.button
-                className="absolute bg-transparent hover:bg-blue-500 hover:bg-opacity-25 transition-colors duration-200 rounded-full"
+                className="interactive-area bg-transparent hover:bg-blue-500 hover:bg-opacity-25 transition-colors duration-200 rounded-full"
                 style={{
                   left: `${element.x}%`,
                   top: `${element.y}%`,

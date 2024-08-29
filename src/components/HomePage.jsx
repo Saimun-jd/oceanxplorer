@@ -1,7 +1,7 @@
 import SpaceshipDisplay from "./SpaceshipDisplay";
 
 const messages = [
-  "loremfjslfjsdkfjskldfjlsdfj",
+  "loremfjslfjsdkfjskldfjlsdfjfjskd fjsf sjdflksadjf saklfjasdklfjsfklajsdf klasdjfkjlfk sjdflasd kfjsdfkl jdslfksdjf klsdjfklsjfklsfjksdjfkdsfjsdkfjsdkljfskf sflskjfsklfjskdlfjksdljfskdfjksldfjfjklsdjfklsdjffkljsdklfjsdklfjksdjfklsdjfklsjfklsdjfksldffjs",
   "sdljfslkdjflskdfjskldfjsdfj",
   "sdjlfjsdlkfjskldfjsdklfjsklfj",
   "sdjfklsjfklsdjffjsdklf"

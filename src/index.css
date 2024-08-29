@@ -23,3 +23,29 @@
     rgba(0, 191, 255, 0.24);
   box-shadow: inset 0 0 12px rgba(0, 191, 255, 0.48);
 }
+
+/* Make sure the container allows scrolling and fits the viewport */
+.image-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto; /* Allow scrolling */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff; /* Optional: Set a background color */
+}
+
+.image-container img {
+  display: block;
+  max-width: none; /* Allow image to exceed container size */
+  max-height: none; /* Allow image to exceed container size */
+  position: relative; /* To keep positioning of child elements */
+}
+
+/* Ensure interactive areas are correctly sized and positioned */
+.interactive-area {
+  position: absolute;
+  /* Additional styles as needed for visibility */
+}
+
