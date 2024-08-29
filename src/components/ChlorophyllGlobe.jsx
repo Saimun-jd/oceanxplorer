@@ -202,7 +202,7 @@ Chlorophyll: ${concentration.toFixed(2)} mg m^-3`,
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', onMouseMove);
-      // mountRef.current.removeChild(renderer.domElement);
+      mountRef.current.removeChild(renderer.domElement);
     };
   }, [currentSeason]);
 
@@ -211,7 +211,7 @@ Chlorophyll: ${concentration.toFixed(2)} mg m^-3`,
   };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-screen flex flex-col items-center justify-center">
       <ColorScale/>
       <div ref={mountRef} className="w-full h-full" />
       {popupInfo.show && (
