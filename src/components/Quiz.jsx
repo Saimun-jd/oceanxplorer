@@ -6,12 +6,12 @@ const Quiz = ({ question, options, correctAnswer, onClose }) => {
   const [answerState, setAnswerState] = useState(null);
 
   var wrong = new Howl({
-    src: ["/src/assets/sounds/wronganswer.mp3"],
+    src: ["/wronganswer.mp3"],
     html: true
   });
 
   var correct = new Howl({
-    src: ["/src/assets/sounds/correctanswer.mp3"],
+    src: ["/correctanswer.mp3"],
     html: true
   });
 

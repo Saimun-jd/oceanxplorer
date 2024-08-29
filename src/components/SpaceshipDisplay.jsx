@@ -7,7 +7,6 @@ import {
 	Wifi,
 	Zap,
 	BarChart,
-	Compass,
 	Bot,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";

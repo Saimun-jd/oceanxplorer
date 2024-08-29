@@ -18,7 +18,7 @@ const elements = [
 		height: 11,
 		description:
 			"Clouds play a crucial role in regulating Earth's temperature and water cycle.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "How does cloud change ocean temperature?",
             options: ["increases", "decreases", "no effect", "small effect"],
@@ -34,7 +34,7 @@ const elements = [
 		height: 8,
 		description:
 			"Oxygen is vital for life on Earth, produced by photosynthesis in marine organisms like phytoplankton.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -50,7 +50,7 @@ const elements = [
 		height: 19,
 		description:
 			"Phytoplankton are microscopic marine algae that form the base of the ocean's food chain.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -66,7 +66,7 @@ const elements = [
 		height: 18,
 		description:
 			"Zooplankton are tiny organisms that drift in water and feed on phytoplankton.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -82,7 +82,7 @@ const elements = [
 		height: 10,
 		description:
 			"Carbon dioxide is a greenhouse gas that contributes to global warming and ocean acidification.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -98,7 +98,7 @@ const elements = [
 		height: 18,
 		description:
 			"Algal blooms are rapid increases in algae populations, often harmful to marine ecosystems.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -114,7 +114,7 @@ const elements = [
 		height: 8,
 		description:
 			"Pollution in the oceans comes from various sources, including plastic waste, chemicals, and oil spills.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -130,7 +130,7 @@ const elements = [
 		height: 24,
 		description:
 			"Phytoplankton blooms are large-scale growths of phytoplankton that can alter marine environments.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -146,7 +146,7 @@ const elements = [
 		height: 14,
 		description:
 			"Aerosols are tiny particles or droplets in the atmosphere that can affect climate and air quality.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -162,7 +162,7 @@ const elements = [
 		height: 10,
 		description:
 			"Toxins in the ocean often come from harmful algal blooms or pollution, affecting marine life and humans.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -178,7 +178,7 @@ const elements = [
 		height: 12.5,
 		description:
 			"The oxygen cycle involves the production and consumption of oxygen in marine ecosystems.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -194,7 +194,7 @@ const elements = [
 		height: 10,
 		description:
 			"Increased CO2 levels in the atmosphere lead to global warming and affect oceanic carbon balance.",
-        sound: '/src/assets/sounds/pick.mp3',
+        sound: '/pick.mp3',
         quiz: {
             question: "Which ocean is the largest?",
             options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
@@ -336,7 +336,7 @@ const InteractiveOceanEcosystem = () => {
   return (
     <div ref={containerRef} className="w-full h-full flex items-center justify-center overflow-hidden">
       <ReactHowler
-        src="src/assets/sounds/background.mp3"
+        src="/background.mp3"
         playing={isMusicPlaying}
         loop={true}
         volume={0.3}
@@ -358,7 +358,7 @@ const InteractiveOceanEcosystem = () => {
       >
         <img
           ref={imageRef}
-          src="/src/assets/pace2.png"
+          src="/pace2.png"
           alt="Ocean Ecosystem"
           className="max-w-none max-h-none object-cover"
           style={{

@@ -112,7 +112,7 @@ const FishMascot = () => {
           <div className="relative mb-4">
             <HtmlTooltip title={tooltipContent} placement="right" open={true}>
               <img
-                src="/src/assets/mascot.png"
+                src="/mascot.png"
                 alt="Shark Mascot"
                 className="w-64 h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
                 onClick={() => handleClick(factIdx)}
