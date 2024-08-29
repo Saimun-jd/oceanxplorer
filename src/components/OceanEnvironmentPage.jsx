@@ -3,7 +3,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { ArrowCircleRightOutlined } from "@mui/icons-material";
 import FishMascot from "./FishMascot";
 
 const pageVariants = {
@@ -22,7 +21,7 @@ const OceanEnvironmentPage = () => {
   const navigate = useNavigate();
 
   const goToNextPage = () => {
-    navigate("/relationship");
+    navigate("/");
   };
 
   return (

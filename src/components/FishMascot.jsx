@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+// eslint-disable-next-line no-unused-vars
+import React, { useState, useEffect } from 'react';
 import HtmlTooltip from './CustomTooltip';
 import { Link } from 'react-router-dom';
-import { Tooltip } from 'chart.js';
 
 const FishMascot = () => {
   const [tooltipContent, setTooltipContent] = useState("Hi! I'm Sharky. Click me to learn about the ocean!");
+  const [factIdx, setFactIdx] = useState(0);
 
   const oceanFacts = [
     "Oceans cover 71% of the Earth's surface.",
@@ -80,8 +81,10 @@ const FishMascot = () => {
 ]
 
 
-  const handleClick = () => {
-    const randomFact = oceanFacts[Math.floor(Math.random() * oceanFacts.length)];
+
+  const handleClick = (idx) => {
+    const randomFact = oceanFacts[idx];
+    setFactIdx((idx+1)%oceanFacts.length);
     setTooltipContent(randomFact);
   };
 
@@ -94,7 +97,7 @@ const FishMascot = () => {
         <div className="md:col-span-1">
           <div className="bg-white rounded-lg p-6 mb-8">
             <h2 className="text-2xl font-bold text-blue-600 mb-4">Ocean Zones</h2>
-            <ul className="list-disc list-inside">
+            <ul className="flex flex-col text-left list-disc list-inside">
               <li>Sunlight Zone (0-200m)</li>
               <li>Twilight Zone (200-1000m)</li>
               <li>Midnight Zone (1000-4000m)</li>
@@ -112,12 +115,12 @@ const FishMascot = () => {
                 src="/src/assets/mascot.png"
                 alt="Shark Mascot"
                 className="w-64 h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
-                onClick={handleClick}
+                onClick={() => handleClick(factIdx)}
               />
             </HtmlTooltip>
           </div>
           <button
-            onClick={handleClick}
+            onClick={() => handleClick(factIdx)}
             className="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-2 px-4 rounded-full transition duration-300 mt-4"
           >
             Ask Sharky a Fact!

@@ -4,6 +4,9 @@ import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import ReactHowler from 'react-howler';
 import Quiz from "./Quiz";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowForward } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const elements = [
 	{
@@ -207,9 +210,9 @@ const InteractiveOceanEcosystem = () => {
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const imageRef = useRef(null);
   const containerRef = useRef(null);
+  const navigate = useNavigate();
 
   
-
   const HtmlTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
   ))(({ theme }) => ({
@@ -234,13 +237,19 @@ const InteractiveOceanEcosystem = () => {
     const updateImageSize = () => {
       if (imageRef.current && containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
+        const containerHeight = containerRef.current.offsetHeight;
         const imgAspectRatio = imageRef.current.naturalWidth / imageRef.current.naturalHeight;
-        const height = containerWidth / imgAspectRatio;
+        
+        let width, height;
+        if (containerWidth / containerHeight > imgAspectRatio) {
+          height = containerHeight;
+          width = height * imgAspectRatio;
+        } else {
+          width = containerWidth;
+          height = width / imgAspectRatio;
+        }
 
-        setImageSize({
-          width: containerWidth,
-          height: height,
-        });
+        setImageSize({ width, height });
       }
     };
 
@@ -289,70 +298,103 @@ const InteractiveOceanEcosystem = () => {
     setSelectedElement(null);
   };
 
+  const goToNextPage = () => {
+    navigate("/aerosol");
+  };
+
   return (
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden">
+    <div ref={containerRef} className="w-full h-full flex items-center justify-center">
       <ReactHowler
         src="src/assets/sounds/background.mp3"
         playing={isMusicPlaying}
         loop={true}
         volume={0.3}
       />
-      <img
-        ref={imageRef}
-        src="/src/assets/pace2.png"
-        alt="Ocean Ecosystem"
-        className="absolute object-contain"
-      />
-      <div
-        className="absolute top-0 left-0"
-        style={{
-          width: `${imageSize.width}px`,
-          height: `${imageSize.height}px`,
-        }}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative w-full h-full flex items-center justify-center"
       >
-        {elements.map((element) => (
-          <HtmlTooltip
-            key={element.id}
-            title={
-              <React.Fragment>
-                <Typography color="inherit">{element.name}</Typography>
-                {element.description}
-              </React.Fragment>
-            }
-          >
-            <button
-              className="absolute bg-transparent hover:bg-blue-500 hover:bg-opacity-25 transition-colors duration-200 rounded-full"
-              style={{
-                left: `${element.x}%`,
-                top: `${element.y}%`,
-                width: `${element.width}%`,
-                height: `${element.height}%`,
-              }}
-              onClick={() => handleElementClick(element)}
-              onMouseEnter={() => handleMouseEnter(element)}
-              onMouseLeave={handleMouseLeave}
-            ></button>
-          </HtmlTooltip>
-        ))}
-      </div>
+        <img
+          ref={imageRef}
+          src="/src/assets/pace2.png"
+          alt="Ocean Ecosystem"
+          className="max-w-full max-h-full object-contain"
+          style={{
+            width: imageSize.width > 0 ? `${imageSize.width}px` : 'auto',
+            height: imageSize.height > 0 ? `${imageSize.height}px` : 'auto',
+          }}
+        />
+        <div 
+          className="absolute inset-0"
+          style={{
+            width: imageSize.width > 0 ? `${imageSize.width}px` : '100%',
+            height: imageSize.height > 0 ? `${imageSize.height}px` : '100%',
+          }}
+        >
+          {elements.map((element) => (
+            <HtmlTooltip
+              key={element.id}
+              title={
+                <React.Fragment>
+                  <Typography color="inherit">{element.name}</Typography>
+                  {element.description}
+                </React.Fragment>
+              }
+            >
+              <motion.button
+                className="absolute bg-transparent hover:bg-blue-500 hover:bg-opacity-25 transition-colors duration-200 rounded-full"
+                style={{
+                  left: `${element.x}%`,
+                  top: `${element.y}%`,
+                  width: `${element.width}%`,
+                  height: `${element.height}%`,
+                }}
+                onClick={() => handleElementClick(element)}
+                onMouseEnter={() => handleMouseEnter(element)}
+                onMouseLeave={handleMouseLeave}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              ></motion.button>
+            </HtmlTooltip>
+          ))}
+        </div>
+      </motion.div>
 
       {hoveredElement && (
         <ReactHowler
           src={hoveredElement.sound}
           playing={true}
           volume={0.5}
-          onEnd={() => setHoveredElement(null)} // Stop sound after playing
+          onEnd={() => setHoveredElement(null)}
         />
       )}
 
-      {selectedElement && (
-        <Quiz
-          question={selectedElement.quiz.question}
-          options={selectedElement.quiz.options}
-          correctAnswer={selectedElement.quiz.correctAnswer}
-          onClose={closeModal}
-        />
-      )}
+      <AnimatePresence>
+        {selectedElement && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50"
+          >
+            <Quiz
+              question={selectedElement.quiz.question}
+              options={selectedElement.quiz.options}
+              correctAnswer={selectedElement.quiz.correctAnswer}
+              onClose={closeModal}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <button 
+        className="absolute bottom-10 right-10 bg-blue-600 text-white p-3 rounded-full shadow-lg"
+        onClick={goToNextPage}
+      >
+        <ArrowForward />
+      </button>
     </div>
   );
 };

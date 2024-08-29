@@ -16,6 +16,7 @@ const pageTransition = {
   duration: 0.6
 };
 
+
 const PhytoplanktonPage = () => {
   const navigate = useNavigate();
 
