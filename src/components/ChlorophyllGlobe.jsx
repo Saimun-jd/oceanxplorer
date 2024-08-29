@@ -10,7 +10,7 @@ const ColorScale = () => {
         <img 
           src="/scale.png" 
           alt="Chlorophyll Concentration Color Scale" 
-          className="w-full h-16 object-cover"
+          className="w-full h-auto object-contain"
         />
     </div>
   );
@@ -19,8 +19,9 @@ const ColorScale = () => {
 const ChlorophyllGlobe = () => {
   const mountRef = useRef(null);
   const globeRef = useRef(null);
+  const rendererRef = useRef(null);
   const [popupInfo, setPopupInfo] = useState({ show: false, text: '', x: 0, y: 0 });
-  const [currentSeason, setCurrentSeason] = useState('spring');
+  // const [currentSeason, setCurrentSeason] = useState('spring');
   const navigate = useNavigate();
 
   const goBack  = () => {
@@ -32,6 +33,7 @@ const ChlorophyllGlobe = () => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
+    rendererRef.current = renderer;
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
@@ -39,19 +41,20 @@ const ChlorophyllGlobe = () => {
     // Create globe
     const geometry = new THREE.SphereGeometry(5, 64, 64);
     const loader = new THREE.TextureLoader();
+    const chlorophyllData = loader.load('/chlorophyll-concentration.png')
     
     // Load chlorophyll data for all seasons
-    const textures = {
-      spring: loader.load('/chlorophyll-concentration_spring.png'),
-      summer: loader.load('/chlorophyll-concentration_summer.png'),
-      autumn: loader.load('/chlorophyll-concentration_autumn.png'),
-      winter: loader.load('/chlorophyll-concentration_winter.png')
-    };
+    // const textures = {
+    //   spring: loader.load('/chlorophyll-concentration_spring.png'),
+    //   summer: loader.load('/chlorophyll-concentration_summer.png'),
+    //   autumn: loader.load('/chlorophyll-concentration_autumn.png'),
+    //   winter: loader.load('/chlorophyll-concentration_winter.png')
+    // };
     
     // Create material with the chlorophyll data texture
     const material = new THREE.ShaderMaterial({
       uniforms: {
-        chlorophyllData: { value: textures[currentSeason] },
+        chlorophyllData: { value: chlorophyllData },
       },
       vertexShader: `
         varying vec2 vUv;
@@ -202,18 +205,31 @@ Chlorophyll: ${concentration.toFixed(2)} mg m^-3`,
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', onMouseMove);
-      mountRef.current.removeChild(renderer.domElement);
+      
+      // Safe cleanup of Three.js resources
+      if (rendererRef.current) {
+        rendererRef.current.dispose();
+        rendererRef.current = null;
+      }
+      if (globeRef.current) {
+        globeRef.current.geometry.dispose();
+        globeRef.current.material.dispose();
+        scene.remove(globeRef.current);
+      }
+      if (mountRef.current && mountRef.current.contains(renderer.domElement)) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
     };
-  }, [currentSeason]);
+  }, []);
 
-  const changeSeason = (season) => {
-    setCurrentSeason(season);
-  };
+  // const changeSeason = (season) => {
+  //   setCurrentSeason(season);
+  // };
 
   return (
     <div className="relative w-full h-screen flex flex-col items-center justify-center">
       <ColorScale/>
-      <div ref={mountRef} className="w-full h-full" />
+      <div ref={mountRef} className="w-full h-auto" />
       {popupInfo.show && (
         <div 
           className="absolute bg-white bg-opacity-80 p-2 rounded shadow"
@@ -227,10 +243,6 @@ Chlorophyll: ${concentration.toFixed(2)} mg m^-3`,
           <ChevronLeft/>
           <span>Back</span>
         </button>
-        <button onClick={() => changeSeason('spring')} className="px-4 py-2 bg-green-500 text-white rounded">Spring</button>
-        <button onClick={() => changeSeason('summer')} className="px-4 py-2 bg-yellow-500 text-white rounded">Summer</button>
-        <button onClick={() => changeSeason('autumn')} className="px-4 py-2 bg-orange-500 text-white rounded">Autumn</button>
-        <button onClick={() => changeSeason('winter')} className="px-4 py-2 bg-blue-500 text-white rounded">Winter</button>
       </div>
     </div>
   );
