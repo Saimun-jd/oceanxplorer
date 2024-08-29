@@ -203,61 +203,88 @@ const elements = [
 	},
 ];
 
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    background: "radial-gradient(circle, rgba(135,206,235,1) 0%, rgba(240,248,255,1) 100%)",
+    color: "#003366",
+    maxWidth: 240,
+    padding: theme.spacing(1.5),
+    fontSize: theme.typography.pxToRem(14),
+    borderRadius: "50%",
+    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+    border: "2px solid rgba(0, 191, 255, 0.6)",
+    textAlign: "center",
+    transition: "all 0.3s ease-in-out",
+  },
+  [`& .${tooltipClasses.arrow}`]: {
+    color: "rgba(135,206,235,1)",
+  },
+}));
+
 const InteractiveOceanEcosystem = () => {
   const [selectedElement, setSelectedElement] = useState(null);
   const [hoveredElement, setHoveredElement] = useState(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(true);
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
   const imageRef = useRef(null);
   const containerRef = useRef(null);
   const navigate = useNavigate();
-
-  
-  const HtmlTooltip = styled(({ className, ...props }) => (
-    <Tooltip {...props} classes={{ popper: className }} />
-  ))(({ theme }) => ({
-    [`& .${tooltipClasses.tooltip}`]: {
-      background: "radial-gradient(circle, rgba(135,206,235,1) 0%, rgba(240,248,255,1) 100%)",
-      color: "#003366",
-      maxWidth: 240,
-      padding: theme.spacing(1.5),
-      fontSize: theme.typography.pxToRem(14),
-      borderRadius: "50%",
-      boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
-      border: "2px solid rgba(0, 191, 255, 0.6)",
-      textAlign: "center",
-      transition: "all 0.3s ease-in-out",
-    },
-    [`& .${tooltipClasses.arrow}`]: {
-      color: "rgba(135,206,235,1)",
-    },
-  }));
 
   useEffect(() => {
     const updateImageSize = () => {
       if (imageRef.current && containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
         const containerHeight = containerRef.current.offsetHeight;
-        const imgAspectRatio = imageRef.current.naturalWidth / imageRef.current.naturalHeight;
-        
-        let width, height;
-        if (containerWidth / containerHeight > imgAspectRatio) {
-          height = containerHeight;
-          width = height * imgAspectRatio;
-        } else {
-          width = containerWidth;
-          height = width / imgAspectRatio;
+        const imgNaturalWidth = imageRef.current.naturalWidth;
+        const imgNaturalHeight = imageRef.current.naturalHeight;
+
+        if (imgNaturalWidth === 0 || imgNaturalHeight === 0) {
+          console.error("Image natural dimensions are not available yet");
+          return;
         }
 
-        setImageSize({ width, height });
+        const imgAspectRatio = imgNaturalWidth / imgNaturalHeight;
+        
+        setIsLargeScreen(containerWidth >= 1024);
+
+        let width, height;
+        if (isLargeScreen) {
+          if (containerWidth / containerHeight > imgAspectRatio) {
+            width = containerWidth;
+            height = containerWidth / imgAspectRatio;
+          } else {
+            height = containerHeight;
+            width = containerHeight * imgAspectRatio;
+          }
+        } else {
+          if (containerWidth / containerHeight > imgAspectRatio) {
+            height = containerHeight;
+            width = containerHeight * imgAspectRatio;
+          } else {
+            width = containerWidth;
+            height = containerWidth / imgAspectRatio;
+          }
+        }
+
+        setImageSize({ 
+          width: Math.round(width), 
+          height: Math.round(height) 
+        });
       }
     };
 
     const img = imageRef.current;
-    if (img && img.complete) {
-      updateImageSize();
-    } else if (img) {
-      img.onload = updateImageSize;
+    if (img) {
+      if (img.complete) {
+        updateImageSize();
+      } else {
+        img.onload = updateImageSize;
+      }
     }
 
     window.addEventListener("resize", updateImageSize);
@@ -265,25 +292,21 @@ const InteractiveOceanEcosystem = () => {
       window.removeEventListener("resize", updateImageSize);
       if (img) img.onload = null;
     };
-  }, []);
+  }, [isLargeScreen]);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden) {
-        setIsMusicPlaying(false);
-      } else {
-        setIsMusicPlaying(true);
-      }
+      setIsMusicPlaying(!document.hidden);
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, []);
 
   const handleElementClick = (element) => {
-    setSelectedElement(element);
+    if (!isDragging) {
+      setSelectedElement(element);
+    }
   };
 
   const handleMouseEnter = (element) => {
@@ -302,8 +325,16 @@ const InteractiveOceanEcosystem = () => {
     navigate("/aerosol");
   };
 
+  const handleDragStart = () => {
+    setIsDragging(true);
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+  };
+
   return (
-    <div ref={containerRef} className="w-full h-full flex items-center justify-center">
+    <div ref={containerRef} className="w-full h-full flex items-center justify-center overflow-hidden">
       <ReactHowler
         src="src/assets/sounds/background.mp3"
         playing={isMusicPlaying}
@@ -315,22 +346,31 @@ const InteractiveOceanEcosystem = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative w-full h-full flex items-center justify-center"
+        style={{
+          touchAction: "none",
+          cursor: isLargeScreen ? "default" : "grab",
+          overflow: "hidden",
+        }}
+        drag={!isLargeScreen}
+        dragConstraints={containerRef}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
       >
         <img
           ref={imageRef}
           src="/src/assets/pace2.png"
           alt="Ocean Ecosystem"
-          className="max-w-full max-h-full object-contain"
+          className="max-w-none max-h-none object-cover"
           style={{
-            width: imageSize.width > 0 ? `${imageSize.width}px` : 'auto',
-            height: imageSize.height > 0 ? `${imageSize.height}px` : 'auto',
+            width: imageSize.width || '100%',
+            height: imageSize.height || '100%',
           }}
         />
         <div 
           className="absolute inset-0"
           style={{
-            width: imageSize.width > 0 ? `${imageSize.width}px` : '100%',
-            height: imageSize.height > 0 ? `${imageSize.height}px` : '100%',
+            width: imageSize.width || '100%',
+            height: imageSize.height || '100%',
           }}
         >
           {elements.map((element) => (

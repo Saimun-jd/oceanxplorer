@@ -42,10 +42,10 @@ const ChlorophyllGlobe = () => {
     
     // Load chlorophyll data for all seasons
     const textures = {
-      spring: loader.load('/src/assets/chlorophyll-concentration_spring.png'),
-      summer: loader.load('/src/assets/chlorophyll-concentration_summer.png'),
-      autumn: loader.load('/src/assets/chlorophyll-concentration_autumn.png'),
-      winter: loader.load('/src/assets/chlorophyll-concentration_winter.png')
+      spring: loader.load('public/assets/chlorophyll-concentration_spring.png'),
+      summer: loader.load('public/assets/chlorophyll-concentration_summer.png'),
+      autumn: loader.load('public/assets/chlorophyll-concentration_autumn.png'),
+      winter: loader.load('public/assets/chlorophyll-concentration_winter.png')
     };
     
     // Create material with the chlorophyll data texture

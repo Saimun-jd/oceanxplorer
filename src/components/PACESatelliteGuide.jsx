@@ -7,27 +7,27 @@ import { ArrowForward } from '@mui/icons-material';
 const satelliteSteps = [
   {
     title: "Launch",
-    content: "The Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas libero assumenda, in obcaecati quaerat ducimus expedita nihil optio minus aliquam aliquid neque, nobis fuga. Perspiciatis architecto odio aspernatur repellat necessitatibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem aliquam fuga hic dolores laudantium repellat unde a molestias, fugiat itaque incidunt vel blanditiis cupiditate sunt numquam distinctio quasi earum tempora.",
+    content: "The Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
     image: "src/assets/spaceship.jpg"
   },
   {
     title: "Orbit",
-    content: "PACE enters a Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas libero assumenda, in obcaecati quaerat ducimus expedita nihil optio minus aliquam aliquid neque, nobis fuga. Perspiciatis architecto odio aspernatur repellat necessitatibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem aliquam fuga hic dolores laudantium repellat unde a molestias, fugiat itaque incidunt vel blanditiis cupiditate sunt numquam distinctio quasi earum tempora.",
+    content: "PACE enters a Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
     image: "src/assets/spaceship.jpg"
   },
   {
     title: "Solar Panels",
-    content: "The satellite deploys its solar panels to gather energy from the sun. nters a Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas libero assumenda, in obcaecati quaerat ducimus expedita nihil optio minus aliquam aliquid neque, nobis fuga. Perspiciatis architecto odio aspernatur repellat necessitatibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem aliquam fuga hic dolores laudantium repellat unde a molestias, fugiat itaque incidunt vel blanditiis cupiditate sunt numquam distinctio quasi earum tempor",
+    content: "The satellite deploys its solar panels to gather energy from the sun. nters a Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
     image: "src/assets/spaceship.jpg"
   },
   {
     title: "Data Collection",
-    content: "PACE uses Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas libero assumenda, in obcaecati quaerat ducimus expedita nihil optio minus aliquam aliquid neque, nobis fuga. Perspiciatis architecto odio aspernatur repellat necessitatibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem aliquam fuga hic dolores laudantium repellat unde a molestias, fugiat itaque incidunt vel blanditiis cupiditate sunt numquam distinctio quasi earum tempora.",
+    content: "PACE uses Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
     image: "src/assets/spaceship.jpg"
   },
   {
     title: "Data Transmission",
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas libero assumenda, in obcaecati quaerat ducimus expedita nihil optio minus aliquam aliquid neque, nobis fuga. Perspiciatis architecto odio aspernatur repellat necessitatibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem aliquam fuga hic dolores laudantium repellat unde a molestias, fugiat itaque incidunt vel blanditiis cupiditate sunt numquam distinctio quasi earum tempora.",
+    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita veniam quidem illum dolor tempora facilis assumenda repellendus porro, vel corrupti reprehenderit consequuntur asperiores, maxime, harum perferendis sit recusandae autem.",
     image: "src/assets/spaceship.jpg"
   },
 ];
@@ -71,11 +71,11 @@ const PACESatelliteGuide = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-900 via-blue-900 to-black text-white p-8 overflow-hidden">
-      <h1 className="text-4xl font-bold text-center mb-12 text-yellow-300">
+    <div className="min-h-screen bg-gradient-to-b from-purple-900 via-blue-900 to-black text-white p-4 sm:p-8 overflow-hidden">
+      <h1 className="text-2xl sm:text-4xl font-bold text-center mb-6 sm:mb-12 text-yellow-300">
         Journey of NASA's PACE Satellite
       </h1>
-      <div className="relative max-w-3xl mx-auto h-[768px]">
+      <div className="relative max-w-3xl mx-auto h-[500px] sm:h-[600px] md:h-[700px]">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentCard}
@@ -92,17 +92,17 @@ const PACESatelliteGuide = () => {
             className="absolute w-full h-full"
           >
             <div className="bg-gray-800 bg-opacity-70 rounded-lg shadow-lg overflow-hidden
-                            border-2 border-blue-400 animate-pulse">
+                            border-2 border-blue-400 animate-pulse h-full flex flex-col">
               <img
                 src={satelliteSteps[currentCard].image}
                 alt={satelliteSteps[currentCard].title}
-                className="w-full h-48 object-cover"
+                className="w-full h-40 sm:h-48 object-cover"
               />
-              <div className="p-6">
-                <h2 className="text-2xl font-semibold mb-4 text-blue-300">
+              <div className="p-4 sm:p-6 flex-grow overflow-y-auto">
+                <h2 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-4 text-blue-300">
                   {satelliteSteps[currentCard].title}
                 </h2>
-                <p className="text-gray-300">
+                <p className="text-sm sm:text-base text-gray-300">
                   {satelliteSteps[currentCard].content}
                 </p>
               </div>
@@ -112,24 +112,24 @@ const PACESatelliteGuide = () => {
 
         <button
           onClick={prevCard}
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-full
-                     bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-colors"
+          className="absolute top-1/2 left-2 sm:left-0 transform -translate-y-1/2 sm:-translate-x-full
+                     bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-colors z-10"
         >
-          <ChevronRight className="w-6 h-6 transform rotate-180" />
+          <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6 transform rotate-180" />
         </button>
         <button
           onClick={nextCard}
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-full
-                     bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-colors"
+          className="absolute top-1/2 right-2 sm:right-0 transform -translate-y-1/2 sm:translate-x-full
+                     bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-colors z-10"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
         </button>
 
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {satelliteSteps.map((_, index) => (
             <div
               key={index}
-              className={`w-3 h-3 rounded-full ${
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
                 index === currentCard ? 'bg-blue-500' : 'bg-gray-400'
               }`}
             />
@@ -137,10 +137,11 @@ const PACESatelliteGuide = () => {
         </div>
       </div>
       <button 
-        className="absolute bottom-10 right-10 bg-blue-600 text-white p-3 rounded-full shadow-lg"
+        className="fixed bottom-4 right-4 sm:bottom-10 sm:right-10 bg-blue-600 text-white p-2 sm:p-3 rounded-full shadow-lg z-20 flex items-center justify-center"
         onClick={goToNextPage}
       >
-        <ArrowForward />
+        <ArrowForward className="w-5 h-5 sm:w-6 sm:h-6" />
+        <span className="ml-2 text-sm sm:text-base hidden sm:inline">Explore Globe</span>
       </button>
     </div>
   );
