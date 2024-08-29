@@ -8,7 +8,7 @@ const ColorScale = () => {
   return (
     <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-80 p-2 rounded shadow">
         <img 
-          src="src/assets/scale.png" 
+          src="/scale.png" 
           alt="Chlorophyll Concentration Color Scale" 
           className="w-full h-16 object-cover"
         />
