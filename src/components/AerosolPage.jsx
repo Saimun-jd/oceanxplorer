@@ -38,7 +38,7 @@ const AerosolPage = () => {
         Aerosols are tiny particles suspended in the atmosphere that can affect climate, weather, and air quality. Learn about their role in our environment.
       </p>
       <button 
-        className="absolute bottom-10 right-10 bg-blue-600 text-white p-3 rounded-full shadow-lg"
+        className="absolute bottom-14 right-10 bg-blue-600 text-white p-3 rounded-full shadow-lg"
         onClick={goToNextPage}
       >
         <ArrowForwardIcon />

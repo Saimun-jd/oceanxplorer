@@ -25,23 +25,16 @@ const OceanEnvironmentPage = () => {
   };
 
   return (
-    <motion.div
-      initial="initial"
-      animate="in"
-      exit="out"
-      variants={pageVariants}
-      transition={pageTransition}
-      className="bg-gradient-to-b from-blue-100 to-blue-300 min-h-screen flex flex-col items-center justify-center text-center p-4"
-    >
+    <>
     <FishMascot/>
       <button 
-        className="absolute bottom-10 right-10 from-indigo-500 via-pink-400 to-purple-500 bg-gradient-to-r text-white p-3 rounded-full shadow-lg"
+        className="absolute bottom-14 right-10 from-indigo-500 via-pink-400 to-purple-500 bg-gradient-to-r text-white p-3 rounded-full shadow-lg"
         onClick={goToNextPage}
       >
         <ArrowForwardIcon className="transition-transform duration-300 ease-in-out hover:scale-110" />
       </button>
     {/* // </div> */}
-    </motion.div>
+    </>
   );
 };
 

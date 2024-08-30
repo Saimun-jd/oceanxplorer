@@ -40,7 +40,7 @@ const PhytoplanktonPage = () => {
         Phytoplankton are microscopic marine organisms essential to the ocean's ecosystem. Learn how they contribute to carbon cycling and support marine life.
       </p>
       <button 
-        className="absolute bottom-10 right-10 bg-blue-600 text-white p-3 rounded-full shadow-lg"
+        className="absolute bottom-14 right-10 bg-blue-600 text-white p-3 rounded-full shadow-lg"
         onClick={goToNextPage}
       >
         <ArrowForwardIcon />

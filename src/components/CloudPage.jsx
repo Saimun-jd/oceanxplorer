@@ -61,7 +61,7 @@ const CloudPage = () => {
         <span className="animate-ping font-extrabold">|</span>
       </p>
       <button 
-        className="absolute bottom-10 right-10 bg-blue-600 text-white p-3 rounded-full shadow-lg"
+        className="absolute bottom-14 right-10 bg-blue-600 text-white p-3 rounded-full shadow-lg"
         onClick={goToNextPage}
       >
         <ArrowForwardIcon />
