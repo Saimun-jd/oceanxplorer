@@ -307,7 +307,7 @@ const InteractiveOceanEcosystem = () => {
   };
 
   const goToNextPage = () => {
-    navigate("/aerosol");
+    navigate("/");
   };
 
   const handleDragStart = () => {

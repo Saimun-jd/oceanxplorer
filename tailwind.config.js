@@ -6,7 +6,10 @@ export default {
   ],
   theme: {
     extend: {
-      
+      fontFamily: {
+        nerkoone: ["Nerko One", "cursive"],
+        newamsterdam: ["New Amsterdam", "sans-serif"]
+      }
     },
   },
   plugins: [],

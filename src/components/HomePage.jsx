@@ -1,18 +1,13 @@
-import SpaceshipDisplay from "./SpaceshipDisplay";
-
-const messages = [
-  "The NASA PACE (Plankton, Aerosol, Cloud, ocean Ecosystem) satellite is a significant mission aimed at advancing our understanding of Earth's oceans and atmosphere. Here are some key details about the satellite:",
-  "sdljfslkdjflskdfjskldfjsdfj",
-  "sdjlfjsdlkfjskldfjsdklfjsklfj",
-  "sdjfklsjfklsdjffjsdklf"
-]
-
+import Hero from "./Hero";
+import Navbar from "./Navbar";
 
 const HomePage = () => {
-
-  return (
-        <SpaceshipDisplay messages={messages}/>
-  );
+	return (
+		<div className=" min-h-screen">
+      <Navbar />
+      <Hero />
+    </div>
+	);
 };
 
 export default HomePage;

@@ -9,6 +9,7 @@ import OceanEnvironmentPage from "./components/OceanEnvironmentPage";
 import PACESatelliteGuide from "./components/PACESatelliteGuide";
 import InteractiveOceanEcosystem from "./components/InteractiveOceanEcosystem";
 import ChlorophyllGlobe from "./components/ChlorophyllGlobe";
+import FishMascot from "./components/FishMascot"
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/cloud" element={<CloudPage />} />
         <Route path="/ocean-environment" element={<OceanEnvironmentPage />} />
         <Route path="/globe" element={<ChlorophyllGlobe />} />
+        <Route path="/facts" element={<FishMascot/>}/>
       </Routes>
     </Router>
   );

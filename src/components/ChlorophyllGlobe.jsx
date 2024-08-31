@@ -272,7 +272,7 @@ Chlorophyll: ${concentration} mg/m^3`,
 					{popupInfo.text}
 				</div>
 			)}
-			<div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
+			<div className="fixed bottom-4 right-4 z-10">
 				<button
 					onClick={goBack}
 					className="px-4 py-2 bg-green-500 text-white rounded"
