@@ -1,5 +1,4 @@
-
-import InteractiveImage from "./InterActiveImage";
+import InteractiveImage from "./InteractiveImage";
 
 const elements = [
 	{
