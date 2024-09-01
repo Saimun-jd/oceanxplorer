@@ -6,7 +6,7 @@ const OceanEnvironmentPage = () => {
 	const navigate = useNavigate();
 
 	const goToNextPage = () => {
-		navigate("/exploreocean");
+		navigate("/choosescene");
 	};
 
 	return (

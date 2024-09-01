@@ -9,7 +9,7 @@ const cards = [
   { id: 2, image: "/green_phyto.jpeg", backgroundImage: "/green_phyto.jpeg", link: "/phytoplankton", title: "Phytoplankton", description: "Microscopic marine algae." },
   { id: 3, image: "/aerosol.png", backgroundImage: "/aerosol.png", link: "/aerosol", title: "Aerosol", description: "Liquid drop in air" },
   { id: 4, image: "/nasa_cloud.jpg", backgroundImage: "/nasa_cloud.jpg", link: "/cloud", title: "Cloud", description: "Water droplets in the sky" },
-  { id: 5, image: "/ocean_env.jpeg", backgroundImage: "/ocean_env.jpeg", link: "/ocean-environment", title: "Ocean Environment", description: "Vast body of saltwater" },
+  { id: 5, image: "/ocean_environment1.jpg", backgroundImage: "/ocean_environment1.jpg", link: "/ocean-environment", title: "Ocean Environment", description: "Vast body of saltwater" },
 ];
 
 const HeroContent = () => {
@@ -121,7 +121,7 @@ const HeroContent = () => {
 
       <motion.div
         variants={slideInFromLeft(1.2)}
-        className="flex flex-row justify-center items-start sm:space-x-4 md:space-x-8 space-y-4 sm:space-y-0 text-white mt-8 md:mt-0"
+        className="flex justify-center items-baseline space-x-4 sm:space-x-4 md:space-x-8 space-y-4 sm:space-y-0 text-white mt-8"
       >
         <NavLink to="https://pace.oceansciences.org/data.htm" className="text-base sm:text-lg md:text-xl">Access pace data</NavLink>
         <NavLink to="/aboutus" className="text-base sm:text-lg md:text-xl">About US</NavLink>
