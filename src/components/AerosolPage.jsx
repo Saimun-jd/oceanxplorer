@@ -26,10 +26,10 @@ const AerosolPage = () => {
           </div>
           
           <div className="md:w-1/2 md:pl-8">
-            <h2 className="text-2xl font-semibold text-blue-700 mb-4 font-nerkoone">
+            <h2 className="text-2xl font-semibold text-blue-700 mb-4 font-mono">
               What is Aerosol?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-nerkoone">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-mono">
               An aerosol is a suspension of tiny particles or droplets in a gas, typically the Earth's atmosphere. These particles can be either solid, such as dust, pollen, and soot, or liquid, like water droplets or chemical compounds. Aerosols come from both natural sources, such as volcanic eruptions, sea spray, and forest fires, and human activities, including vehicle emissions, industrial processes, and the burning of fossil fuels. They play a significant role in atmospheric chemistry and climate by influencing cloud formation, scattering and absorbing sunlight, and affecting air quality. Depending on their composition, aerosols can have both cooling and warming effects on the planet. While they reflect sunlight back into space, potentially cooling the Earth's surface, they can also absorb heat, contributing to atmospheric warming. In addition to their climatic impact, aerosols can pose health risks when inhaled, leading to respiratory and cardiovascular issues.
             </p>
           </div>

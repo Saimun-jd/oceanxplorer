@@ -40,7 +40,7 @@ const Navbar = () => {
             <NavLink to="/exploreocean" className="text-white text-xl">Ocean</NavLink>
             <NavLink to="/globe" className="text-white text-xl">Globe</NavLink>
             <NavLink to="https://pace.oceansciences.org/news.htm" className="text-white text-xl">NEWS AND UPDATES</NavLink>
-            <NavLink to="https://pace.oceansciences.org/aerosol_quiz.htm" className="text-white text-xl">GAMES</NavLink>
+            <NavLink to="/choosescene" className="text-white text-xl">GAMES</NavLink>
             <NavLink to="/facts" className="text-white text-xl">FACTS</NavLink>
             <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1">
               <input type="text" value={searchVal} onChange={(e) => setSearchVal(e.target.value)} className="bg-transparent text-white placeholder-white outline-none" />

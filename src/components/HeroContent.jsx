@@ -5,10 +5,11 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const cards = [
-  { id: 1, image: "/phytoplankton.jpg", backgroundImage: "/phytoplankton.jpg", link: "/phytoplankton", title: "Phytoplankton", description: "Microscopic marine algae." },
-  { id: 2, image: "/aerosol.png", backgroundImage: "/aerosol.png", link: "/aerosol", title: "Aerosol", description: "Liquid drop in air" },
-  { id: 3, image: "/cloud.jpg", backgroundImage: "/cloud.jpg", link: "/cloud", title: "Cloud", description: "Water droplets in the sky" },
-  { id: 4, image: "/ocean.jpg", backgroundImage: "/ocean.jpg", link: "/ocean-environment", title: "Ocean Environment", description: "Vast body of saltwater" },
+  { id: 1, image: "/pace1.jpg", backgroundImage: "/pace1.jpg", link: "/paceguide", title: "Learn about pace internals", description: "NASA PACE satellite is an Earth-Observing satellite." },
+  { id: 2, image: "/green_phyto.jpeg", backgroundImage: "/green_phyto.jpeg", link: "/phytoplankton", title: "Phytoplankton", description: "Microscopic marine algae." },
+  { id: 3, image: "/aerosol.png", backgroundImage: "/aerosol.png", link: "/aerosol", title: "Aerosol", description: "Liquid drop in air" },
+  { id: 4, image: "/nasa_cloud.jpg", backgroundImage: "/nasa_cloud.jpg", link: "/cloud", title: "Cloud", description: "Water droplets in the sky" },
+  { id: 5, image: "/ocean_env.jpeg", backgroundImage: "/ocean_env.jpeg", link: "/ocean-environment", title: "Ocean Environment", description: "Vast body of saltwater" },
 ];
 
 const HeroContent = () => {

@@ -184,12 +184,14 @@ const InteractiveImage = ({elements, image}) => {
               leaveTouchDelay={5000}
             >
               <motion.button
-                className="interactive-area bg-transparent hover:bg-blue-500 hover:bg-opacity-25 transition-colors duration-200 rounded-full"
+                className="interactive-area bg-transparent hover:bg-blue-300 hover:bg-opacity-50 transition-all duration-300 rounded-full"
                 style={{
                   left: `${element.x}%`,
                   top: `${element.y}%`,
                   width: `${element.width}%`,
                   height: `${element.height}%`,
+                  boxShadow: '0 00 8px px rgba(30, 144, 255, 0.5)',
+                  border: '2px solid rgba(30, 144, 255, 0.5)'
                 }}
                 onClick={() => handleElementClick(element)}
                 onMouseEnter={() => handleMouseEnter(element)}

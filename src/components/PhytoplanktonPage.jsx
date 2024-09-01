@@ -19,17 +19,17 @@ const PhytoplanktonPage = () => {
         <div className="container mx-auto flex flex-col md:flex-row items-start justify-between">
           <div className="md:w-1/2 mb-8 md:mb-0">
             <img
-              src="/phytoplankton.jpg"
+              src="/little_phytoplankton.png"
               alt="Phytoplankton"
               className="rounded-lg shadow-lg w-full"
             />
           </div>
           
           <div className="md:w-1/2 md:pl-8">
-            <h2 className="text-2xl font-semibold text-blue-700 mb-4 font-nerkoone">
+            <h2 className="text-2xl font-semibold text-blue-700 mb-4 font-mono">
               What are Phytoplankton?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-nerkoone">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-mono">
               Phytoplankton are microscopic marine algae that form the foundation of aquatic food webs. These tiny organisms are capable of photosynthesis, which means they use sunlight to convert carbon dioxide and water into energy, just like plants on land. Phytoplankton are responsible for producing about half of the world's oxygen and serve as a crucial food source for many aquatic creatures, from tiny zooplankton to large whales. Their presence and abundance can indicate the health of an ecosystem and play a significant role in global carbon cycles and climate regulation. Phytoplankton are microscopic marine algae that form the foundation of aquatic food webs. These tiny organisms are capable of photosynthesis, which means they use sunlight to convert carbon dioxide and water into energy, just like plants on land. Phytoplankton are responsible for producing about half of the world's oxygen and serve as a crucial food source for many aquatic creatures, from tiny zooplankton to large whales. Their presence and abundance can indicate the health of an ecosystem and play a significant role in global carbon cycles and climate regulation.
             </p>
           </div>

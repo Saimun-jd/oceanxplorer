@@ -27,10 +27,10 @@ const OceanEnvironmentPage = () => {
 					</div>
 
 					<div className="md:w-1/2 md:pl-8">
-						<h2 className="text-2xl font-semibold text-blue-700 mb-4 font-nerkoone">
+						<h2 className="text-2xl font-semibold text-blue-700 mb-4 font-mono">
 							What is Ocean Environment?
 						</h2>
-						<p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-nerkoone">
+						<p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-mono">
 							The ocean environment, covering more than 70% of the
 							Earth's surface, is a vast and dynamic ecosystem
 							that supports an incredible diversity of life. It is

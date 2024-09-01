@@ -26,10 +26,10 @@ const CloudPage = () => {
           </div>
           
           <div className="md:w-1/2 md:pl-8">
-            <h2 className="text-base sm:text-lg md:text-xl font-semibold text-blue-700 mb-4 font-nerkoone">
+            <h2 className="text-base sm:text-lg md:text-xl font-semibold text-blue-700 mb-4 font-mono">
               What is Cloud?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-nerkoone">
+            <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-mono">
               A cloud is a visible mass of tiny water droplets or ice crystals suspended in the Earth's atmosphere. Formed when moist, warm air rises and cools, clouds play a crucial role in regulating the Earth's climate and weather patterns. They come in various shapes and sizes, ranging from fluffy cumulus clouds to high-altitude cirrus clouds that resemble delicate wisps. Clouds are not only beautiful natural phenomena but also vital components of the water cycle, providing precipitation that sustains life on the planet. Moreover, they reflect and absorb sunlight, influencing the Earth's energy balance and helping maintain a habitable environment.
             </p>
           </div>
