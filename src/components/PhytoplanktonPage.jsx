@@ -80,7 +80,7 @@ const PhytoplanktonPage = () => {
   const sectionContents = [
     (
       <>
-        <h1 className="text-5xl font-bold text-center text-blue-800 mb-8 font-serif">
+        <h1 className="text-3xl font-bold text-center text-blue-800 mb-8 font-serif">
           The Wonderful World of Phytoplankton
         </h1>
         <h2 className="text-3xl font-semibold text-blue-700 mb-6 font-sans">

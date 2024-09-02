@@ -197,7 +197,7 @@ const elements = [
 
 const InteractiveOceanEcosystem = () => {
   return (
-    <InteractiveImage elements={elements} image={"/pace2.png"}/>
+    <InteractiveImage elements={elements} image={"/pace2.png"} title="click on the highlighted element to check your understanding"/>
   )
 }
 

@@ -18,7 +18,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
     maxWidth: 300,
     padding: theme.spacing(2),
     fontSize: theme.typography.pxToRem(14),
-    borderRadius: "50%",
+    borderRadius: "20%",
     boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
     border: "2px solid rgba(0, 191, 255, 0.6)",
     textAlign: "center",
@@ -29,7 +29,7 @@ const HtmlTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const InteractiveImage = ({elements, image}) => {
+const InteractiveImage = ({elements, image, title}) => {
   const [selectedElement, setSelectedElement] = useState(null);
   const [hoveredElement, setHoveredElement] = useState(null);
   const [isMusicPlaying, setIsMusicPlaying] = useState(true);
@@ -116,11 +116,13 @@ const InteractiveImage = ({elements, image}) => {
   };
 
   const handleTouchStart = (element) => {
-    setHoveredElement(element);
+    if(isMobile)
+        setHoveredElement(element);
   };
 
   const handleTouchEnd = () => {
-    setHoveredElement(null);
+    if(isMobile)
+        setHoveredElement(null);
   };
 
   const closeModal = () => {
@@ -180,8 +182,8 @@ const InteractiveImage = ({elements, image}) => {
                   {element.description}
                 </React.Fragment>
               }
-              enterTouchDelay={0}
-              leaveTouchDelay={5000}
+              enterTouchDelay={isMobile? 0: 500}
+              leaveTouchDelay={isMobile? 500: 100}
             >
               <motion.button
                 className="interactive-area bg-transparent hover:bg-blue-300 hover:bg-opacity-50 transition-all duration-300 rounded-full"

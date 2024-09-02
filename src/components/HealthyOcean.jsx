@@ -95,7 +95,7 @@ const elements = [
 
 const HealthyOcean = () => {
   return (
-    <InteractiveImage elements={elements} image={"/ocean-1.png"}/>
+    <InteractiveImage elements={elements} image={"/ocean-1.png"} title="healthy ocean condition"/>
   )
 }
 

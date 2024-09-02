@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 const scenes = [
   { id: 1, title: 'scene 1', image: '/pace2.png', path: '/exploreocean' },
   { id: 2, title: 'scene 2', image: '/ocean-1.png', path: '/healthyocean' },
+  { id: 3, title: 'scene 3', image: '/underwater.png', path: '/unhealthyocean' },
 ];
 
 const SceneSelector = () => {
@@ -16,7 +17,7 @@ const SceneSelector = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 via-blue-600 to-blue-300 text-white p-8">
+    <div className="min-h-screen bg-gradient-to-tl from-blue-700 via-blue-500 to-blue-300 text-white p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-5xl font-bold mb-12 text-center text-yellow-300 drop-shadow-lg">
           Choose Your Adventure

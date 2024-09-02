@@ -12,6 +12,7 @@ import ChlorophyllGlobe from "./components/ChlorophyllGlobe";
 import FishMascot from "./components/FishMascot"
 import HealthyOcean from "./components/HealthyOcean";
 import SceneSelector from "./components/SceneSelector";
+import UnhealthyOcean from "./components/UnhealthyOcean";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/globe" element={<ChlorophyllGlobe />} />
         <Route path="/facts" element={<FishMascot/>}/>
         <Route path="/healthyocean" element={<HealthyOcean/>}/>
+        <Route path="/unhealthyocean" element={<UnhealthyOcean/>}/>
         <Route path="/choosescene" element={<SceneSelector/>}/>
       </Routes>
     </Router>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -38,8 +38,15 @@ const satelliteSteps = [
 const PACESatelliteGuide = () => {
 	const [currentCard, setCurrentCard] = useState(0);
 	const [direction, setDirection] = useState(0);
+	const videoRef = useRef(null);
 
 	const navigate = useNavigate();
+
+	const handleOnloadMetaData = () => {
+		if(videoRef.current) {
+			videoRef.current.playbackRate = 2;
+		}
+	}
 
 	const goToNextPage = () => {
 		navigate("/phytoplankton");
@@ -101,11 +108,12 @@ const PACESatelliteGuide = () => {
 						<div className="bg-gray-800 bg-opacity-70 rounded-lg shadow-lg overflow-hidden border-2 border-blue-400 h-full flex flex-col">
 							{satelliteSteps[currentCard].isVideo === true ? (
 								<video
+									ref={videoRef}
+									onLoadedMetadata={handleOnloadMetaData}
 									loop
 									autoPlay
 									muted
 									className="w-full h-40 sm:h-3/6 object-fill"
-									
 								>
 									<source
 										src={satelliteSteps[currentCard].image}
