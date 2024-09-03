@@ -14,7 +14,7 @@ const OceanEnvironmentPage = () => {
 			<div className="p-8 pb-20">
 				{" "}
 				{/* Added bottom padding to prevent content from being hidden behind the button */}
-				<h1 className="text-4xl font-bold text-center text-blue-800 mb-12 font-newamsterdam">
+				<h1 className="text-4xl font-bold text-center text-blue-800 mb-12">
 					Understanding Ocean Environment
 				</h1>
 				<div className="container mx-auto flex flex-col md:flex-row items-start justify-between">

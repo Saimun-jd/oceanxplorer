@@ -5,7 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const cards = [
-  { id: 1, image: "/pace1.jpg", backgroundImage: "/pace1.jpg", link: "/paceguide", title: "Learn about pace internals", description: "NASA PACE satellite is an Earth-Observing satellite." },
+  { id: 1, image: "/aisatellite.png", backgroundImage: "/aisatellite.png", link: "/paceguide", title: "Learn about pace internals", description: "NASA PACE satellite is an Earth-Observing satellite." },
   { id: 2, image: "/green_phyto.jpeg", backgroundImage: "/green_phyto.jpeg", link: "/phytoplankton", title: "Phytoplankton", description: "Microscopic marine algae." },
   { id: 3, image: "/aerosol.png", backgroundImage: "/aerosol.png", link: "/aerosol", title: "Aerosol", description: "Liquid drop in air" },
   { id: 4, image: "/nasa_cloud.jpg", backgroundImage: "/nasa_cloud.jpg", link: "/cloud", title: "Cloud", description: "Water droplets in the sky" },
@@ -59,10 +59,10 @@ const HeroContent = () => {
           variants={slideInFromLeft(0.8)}
           className="flex flex-col items-start mb-8 md:mb-0 md:mr-8 lg:mr-20 w-full md:w-auto"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-4 text-white bg-black bg-opacity-60 rounded-full p-4">
             {cards[currentCard].title}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-8">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white bg-black bg-opacity-60 rounded-full p-4 mb-8">
             {cards[currentCard].description}
           </p>
           <motion.div

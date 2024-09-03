@@ -13,6 +13,7 @@ import FishMascot from "./components/FishMascot"
 import HealthyOcean from "./components/HealthyOcean";
 import SceneSelector from "./components/SceneSelector";
 import UnhealthyOcean from "./components/UnhealthyOcean";
+import Game from "./components/Game";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/healthyocean" element={<HealthyOcean/>}/>
         <Route path="/unhealthyocean" element={<UnhealthyOcean/>}/>
         <Route path="/choosescene" element={<SceneSelector/>}/>
+        <Route path="/game" element={<Game/>}/>
       </Routes>
     </Router>
   );

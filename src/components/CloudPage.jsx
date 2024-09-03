@@ -12,7 +12,7 @@ const CloudPage = () => {
   return (
     <div className="relative min-h-screen bg-blue-200">
       <div className="p-8 pb-20"> {/* Added bottom padding to prevent content from being hidden behind the button */}
-        <h1 className="text-4xl font-bold text-center text-blue-800 mb-12 font-newamsterdam">
+        <h1 className="text-4xl font-bold text-center text-blue-800 mb-12">
           Understanding Cloud
         </h1>
         
