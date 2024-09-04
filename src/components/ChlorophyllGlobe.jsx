@@ -210,6 +210,9 @@ const ChlorophyllGlobe = () => {
 					show: true,
 					text: `Lat: ${lat.toFixed(2)}°, Lon: ${lon.toFixed(2)}°
 Chlorophyll: ${concentration} mg/m^3`,
+					lat: lat.toFixed(2),
+					lon: lon.toFixed(2),
+					concentration,
 					x: event.clientX,
 					y: event.clientY,
 				});
@@ -266,10 +269,15 @@ Chlorophyll: ${concentration} mg/m^3`,
 			<div ref={mountRef} className="w-full h-auto" />
 			{popupInfo.show && (
 				<div
-					className="absolute bg-white bg-opacity-80 p-2 rounded shadow"
+					className="absolute bg-black text-white bg-opacity-80 p-2 rounded shadow"
 					style={{ left: popupInfo.x + 10, top: popupInfo.y + 10 }}
 				>
-					{popupInfo.text}
+					<span className="font-bold text-green-500">Lattitude: </span>
+					{popupInfo.lat}<br/>
+					<span className="font-bold text-green-500">Longitude: </span>
+					{popupInfo.lon}<br/>
+					<span className="font-bold text-green-500">Concentration: </span>
+					{popupInfo.concentration}mg/m^3
 				</div>
 			)}
 			<div className="fixed bottom-4 right-4 z-10">

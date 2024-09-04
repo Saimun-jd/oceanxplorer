@@ -57,9 +57,9 @@ const Section = ({ id, content, setActiveSection }) => {
 			initial={{ opacity: 0, y: 50 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 1, ease: "easeOut" }}
-			className="h-screen flex items-center justify-center p-8 relative z-10"
+			className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative z-10"
 		>
-			<div className="max-w-4xl mx-auto bg-white bg-opacity-80 p-8 rounded-lg">
+			<div className="w-full max-w-4xl max-h-[80vh] mx-auto overflow-y-auto bg-white bg-opacity-80 p-4 sm:p-8 rounded-lg">
 				{content}
 			</div>
 		</motion.section>
@@ -78,7 +78,7 @@ const AerosolPage = () => {
 	const sectionContents = [
 		<>
 			<h1 className="text-3xl font-bold text-center text-blue-800 mb-8 font-serif">
-				Aerosol
+				Understanding Aerosols: a guide to their importance and impact
 			</h1>
 			<h2 className="text-3xl font-semibold text-blue-700 mb-6 font-sans">
 				What Are Aerosols?

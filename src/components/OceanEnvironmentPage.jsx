@@ -57,9 +57,9 @@ const Section = ({ id, content, setActiveSection }) => {
 			initial={{ opacity: 0, y: 50 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 1, ease: "easeOut" }}
-			className="h-screen flex items-center justify-center p-8 relative z-10"
+			className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative z-10"
 		>
-			<div className="max-w-4xl mx-auto bg-white bg-opacity-80 p-8 rounded-lg">
+			<div className="w-full max-w-4xl overflow-y-auto mx-auto bg-white bg-opacity-80 p-4 sm:p-8 rounded-lg">
 				{content}
 			</div>
 		</motion.section>
