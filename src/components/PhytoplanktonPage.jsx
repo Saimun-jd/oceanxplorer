@@ -1,34 +1,8 @@
-import React, { useState, useCallback, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useCallback, useRef, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-// Custom hook for intersection observer
-const useIntersectionObserver = (callback, threshold = 0.5) => {
-	const observer = useMemo(
-		() =>
-			new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							callback(entry);
-						}
-					});
-				},
-				{ threshold }
-			),
-		[callback, threshold]
-	);
-
-	const observe = useCallback(
-		(element) => {
-			if (element) observer.observe(element);
-		},
-		[observer]
-	);
-
-	return observe;
-};
+import useInView from "../hooks/useInView";
 
 // Background component
 const Background = ({ imageUrl }) => (
@@ -45,21 +19,20 @@ const Background = ({ imageUrl }) => (
 );
 
 // Section component
-const Section = ({ id, content, setActiveSection }) => {
-	const observe = useIntersectionObserver((entry) =>
-		setActiveSection(parseInt(entry.target.id.split("section")[1]) - 1)
-	);
+const Section = ({ id, content, onInView }) => {
+	const sectionRef = useRef(null);
+	useInView(sectionRef, onInView);
 
 	return (
 		<motion.section
-			ref={observe}
+			ref={sectionRef}
 			id={`section${id}`}
 			initial={{ opacity: 0, y: 50 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 1, ease: "easeOut" }}
-			className="h-screen flex items-center justify-center p-8 relative z-10"
+			className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative z-10"
 		>
-			<div className="max-w-4xl mx-auto bg-white bg-opacity-80 p-8 rounded-lg">
+			<div className="w-full max-w-4xl mx-auto overflow-y-auto max-h-[80vh] bg-white bg-opacity-80 p-4 sm:p-8 rounded-lg">
 				{content}
 			</div>
 		</motion.section>
@@ -71,7 +44,10 @@ const PhytoplanktonPage = () => {
 	const navigate = useNavigate();
 	const [activeSection, setActiveSection] = useState(0);
 
-	const goToNextPage = () => navigate("/aerosol");
+	const goToNextPage = () => {
+		navigate("/aerosol");
+	};
+
 
 	const backgroundImages = ["/phyto1.jpg", "/phyto2.jpg", "/phyto3.jpg"];
 
@@ -96,23 +72,16 @@ const PhytoplanktonPage = () => {
 				Why Are They Important?
 			</h2>
 			<p className="text-lg md:text-xl text-gray-700 leading-relaxed font-sans">
-        <span className="font-bold">
-          Produce Oxygen:
-        </span>
-				Like trees on land, they make oxygen which is
-				essential for fish and other sea creatures. <br/>
-        <span className="font-bold">
-          Food Source:
-        </span>
-        They are the first link in the ocean food chain, feeding small
+				<span className="font-bold">Produce Oxygen:</span>
+				Like trees on land, they make oxygen which is essential for fish
+				and other sea creatures. <br />
+				<span className="font-bold">Food Source:</span>
+				They are the first link in the ocean food chain, feeding small
 				animals called zooplankton. These small animals are then eaten
-				by bigger sea animals. <br/>
-        <span className="font-bold">
-          Climate Helpers:
-        </span>
-        They help take carbon
-				dioxide (a greenhouse gas) out of the atmosphere and keep our
-				planet cooler.
+				by bigger sea animals. <br />
+				<span className="font-bold">Climate Helpers:</span>
+				They help take carbon dioxide (a greenhouse gas) out of the
+				atmosphere and keep our planet cooler.
 			</p>
 		</>,
 		<>
@@ -120,21 +89,27 @@ const PhytoplanktonPage = () => {
 				Phytoplankton Bloom
 			</h2>
 			<p className="text-lg md:text-xl text-gray-700 leading-relaxed font-sans">
-				occur when there is a sudden and rapid increase in the number of phytoplankton in a particular area of the ocean <br/>
-        <span className="font-bold">
-          Rapid Growth:
-        </span>
-          When conditions are just like the right amount of sunlight, nutrients, and warm temperatures, phytoplankton multiply quickly. <br/>
-          <span className="font-bold">
-            Color Change
-          </span>
-          A bloom can sometimes change the color of the water. For example, it might turn green, red, or brown depending on the type of phytoplankton. <br/>
-          <span className="font-bold">
-            Impact on marine life:
-          </span>
-          <br/>
-          <span className="text-green-500 font-bold">Good Effect: </span>Phytoplankton blooms can be good because they provide a lot of food for tiny ocean creatures called zooplankton, which are eaten by bigger animals like fish.<br/>
-          <span className="text-red-500 font-bold">Bad Effect: </span>Sometimes, blooms can be harmful. If the bloom is made up of toxic phytoplankton, it can make the water unsafe for marine life and even affect humans.
+				occur when there is a sudden and rapid increase in the number of
+				phytoplankton in a particular area of the ocean <br />
+				<span className="font-bold">Rapid Growth:</span>
+				When conditions are just like the right amount of sunlight,
+				nutrients, and warm temperatures, phytoplankton multiply
+				quickly. <br />
+				<span className="font-bold">Color Change</span>
+				A bloom can sometimes change the color of the water. For
+				example, it might turn green, red, or brown depending on the
+				type of phytoplankton. <br />
+				<span className="font-bold">Impact on marine life:</span>
+				<br />
+				<span className="text-green-500 font-bold">Good Effect: </span>
+				Phytoplankton blooms can be good because they provide a lot of
+				food for tiny ocean creatures called zooplankton, which are
+				eaten by bigger animals like fish.
+				<br />
+				<span className="text-red-500 font-bold">Bad Effect: </span>
+				Sometimes, blooms can be harmful. If the bloom is made up of
+				toxic phytoplankton, it can make the water unsafe for marine
+				life and even affect humans.
 			</p>
 		</>,
 	];
@@ -153,7 +128,7 @@ const PhytoplanktonPage = () => {
 					key={index}
 					id={index + 1}
 					content={content}
-					setActiveSection={setActiveSection}
+					onInView={() => setActiveSection(index)}
 				/>
 			))}
 

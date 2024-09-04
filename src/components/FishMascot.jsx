@@ -85,7 +85,7 @@ const FishMascot = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-300 to-blue-600 p-8">
+    <div className="min-h-screen bg-gradient-to-b from-sky-300 to-blue-600 p-4 md:p-8">
       <h1 className="text-4xl font-bold text-white text-center mb-8">Ocean Explorer</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -106,11 +106,11 @@ const FishMascot = () => {
         {/* Middle Column - Shark Mascot */}
         <div className="md:col-span-1 flex flex-col items-center justify-center">
           <div className="relative mb-4">
-            <HtmlTooltip title={tooltipContent} placement="right" open={true}>
+            <HtmlTooltip title={tooltipContent} placement="right" open={true} className="tooltip-custom w-full max-w-xs sm:max-w-sm">
               <img
                 src="/mascot.png"
                 alt="Shark Mascot"
-                className="w-64 h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
+                className="w-48 md:w-64 h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
                 onClick={() => handleClick(factIdx)}
                 style={{ touchAction: 'manipulation' }} // Prevent zoom on mobile
               />

@@ -55,7 +55,7 @@ const Navbar = () => {
             <NavLink to="/globe" className="block text-white text-xl py-2">EARTH</NavLink>
             <NavLink to="https://pace.oceansciences.org/news.htm" className="block text-white text-xl py-2">NEWS AND UPDATES</NavLink>
             <NavLink to="/exploreocean" className="block text-white text-xl py-2">ECOSYSTEM</NavLink>
-            <NavLink to="https://pace.oceansciences.org/aerosol_quiz.htm" className="block text-white text-xl py-2">GAMES</NavLink>
+            <NavLink to="/game" className="block text-white text-xl py-2">GAMES</NavLink>
             <NavLink to="/facts" className="block text-white text-xl py-2">FACTS</NavLink>
             <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1 mt-2">
               <input type="text" value={searchVal} onChange={(e)=> setSearchVal(e.target.value)} className="bg-transparent text-white placeholder-white outline-none w-full" />

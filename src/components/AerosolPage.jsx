@@ -1,34 +1,8 @@
-import React, { useState, useCallback, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-// Custom hook for intersection observer
-const useIntersectionObserver = (callback, threshold = 0.5) => {
-	const observer = useMemo(
-		() =>
-			new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							callback(entry);
-						}
-					});
-				},
-				{ threshold }
-			),
-		[callback, threshold]
-	);
-
-	const observe = useCallback(
-		(element) => {
-			if (element) observer.observe(element);
-		},
-		[observer]
-	);
-
-	return observe;
-};
+import useInView from "../hooks/useInView";
 
 // Background component
 const Background = ({ imageUrl }) => (
@@ -45,14 +19,13 @@ const Background = ({ imageUrl }) => (
 );
 
 // Section component
-const Section = ({ id, content, setActiveSection }) => {
-	const observe = useIntersectionObserver((entry) =>
-		setActiveSection(parseInt(entry.target.id.split("section")[1]) - 1)
-	);
+const Section = ({ id, content, onInView }) => {
+	const sectionRef = useRef(null);
+	useInView(sectionRef, onInView);
 
 	return (
 		<motion.section
-			ref={observe}
+			ref={sectionRef}
 			id={`section${id}`}
 			initial={{ opacity: 0, y: 50 }}
 			animate={{ opacity: 1, y: 0 }}
@@ -71,7 +44,9 @@ const AerosolPage = () => {
 	const navigate = useNavigate();
 	const [activeSection, setActiveSection] = useState(0);
 
-	const goToNextPage = () => navigate("/cloud");
+	const goToNextPage = () => {
+		navigate("/cloud");
+	};
 
 	const backgroundImages = ["/phyto1.jpg", "/phyto2.jpg", "/phyto3.jpg"];
 
@@ -117,7 +92,14 @@ const AerosolPage = () => {
 				How Does NASA's PACE Satellite Monitor Aerosols?
 			</h2>
 			<p className="text-lg md:text-xl text-gray-700 leading-relaxed font-sans">
-				PACE is equipped with the Ocean Color Instrument (OCI), a state-of-the-art sensor capable of detecting and distinguishing between different types of aerosols. The OCI can measure light across a wide range of wavelengths, from ultraviolet to near-infrared, enabling it to capture detailed information about aerosols' optical properties. This allows scientists to identify different aerosol types, such as dust, smoke, or pollution, and determine their sizes and concentrations in the atmosphere.
+				PACE is equipped with the Ocean Color Instrument (OCI), a
+				state-of-the-art sensor capable of detecting and distinguishing
+				between different types of aerosols. The OCI can measure light
+				across a wide range of wavelengths, from ultraviolet to
+				near-infrared, enabling it to capture detailed information about
+				aerosols' optical properties. This allows scientists to identify
+				different aerosol types, such as dust, smoke, or pollution, and
+				determine their sizes and concentrations in the atmosphere.
 			</p>
 		</>,
 	];
@@ -136,7 +118,7 @@ const AerosolPage = () => {
 					key={index}
 					id={index + 1}
 					content={content}
-					setActiveSection={setActiveSection}
+					onInView={() => setActiveSection(index)}
 				/>
 			))}
 

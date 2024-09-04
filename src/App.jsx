@@ -15,11 +15,13 @@ import SceneSelector from "./components/SceneSelector";
 import UnhealthyOcean from "./components/UnhealthyOcean";
 import Game from "./components/Game";
 import PaceInsight from "./components/InsightPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
 
   return (
     <Router>
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/paceguide" element={<PACESatelliteGuide/>}/>

@@ -1,34 +1,8 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-// Custom hook for intersection observer
-const useIntersectionObserver = (callback, threshold = 0.5) => {
-	const observer = useMemo(
-		() =>
-			new IntersectionObserver(
-				(entries) => {
-					entries.forEach((entry) => {
-						if (entry.isIntersecting) {
-							callback(entry);
-						}
-					});
-				},
-				{ threshold }
-			),
-		[callback, threshold]
-	);
-
-	const observe = useCallback(
-		(element) => {
-			if (element) observer.observe(element);
-		},
-		[observer]
-	);
-
-	return observe;
-};
+import useInView from "../hooks/useInView";
 
 // Background component
 const Background = ({ imageUrl }) => (
@@ -45,14 +19,16 @@ const Background = ({ imageUrl }) => (
 );
 
 // Section component
-const Section = ({ id, content, setActiveSection }) => {
-	const observe = useIntersectionObserver((entry) =>
-		setActiveSection(parseInt(entry.target.id.split("section")[1]) - 1)
-	);
+const Section = ({ id, content, onInView }) => {
+	// const observe = useIntersectionObserver((entry) =>
+	// 	setActiveSection(parseInt(entry.target.id.split("section")[1]) - 1)
+	// );
+	const sectionRef = useRef(null);
+	useInView(sectionRef, onInView);
 
 	return (
 		<motion.section
-			ref={observe}
+			ref={sectionRef}
 			id={`section${id}`}
 			initial={{ opacity: 0, y: 50 }}
 			animate={{ opacity: 1, y: 0 }}
@@ -157,7 +133,7 @@ const CloudPage = () => {
 					key={index}
 					id={index + 1}
 					content={content}
-					setActiveSection={setActiveSection}
+					onInView={() => setActiveSection(index)}
 				/>
 			))}
 

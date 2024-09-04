@@ -121,7 +121,7 @@ const PACEInsights = () => {
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden bg-gradient-to-tr from-slate-700 to-slate-900">
-      {/* Background elements */}
+      {/* Background elements fucking niggas floating */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
           <motion.div
