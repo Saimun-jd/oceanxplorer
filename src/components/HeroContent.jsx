@@ -20,7 +20,8 @@ const HeroContent = () => {
   useEffect(() => {
     const backgroundElement = document.getElementById("hero-background");
     if (backgroundElement) {
-      backgroundElement.style.backgroundImage = `url(${cards[currentCard].backgroundImage})`;
+      backgroundElement.style.backgroundImage =
+       `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${cards[currentCard].backgroundImage})`;
     }
   }, [currentCard]);
 
@@ -46,7 +47,7 @@ const HeroContent = () => {
         variants={slideInFromLeft(0.6)}
         className="w-full text-white mb-8 md:mb-0"
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 leading-tight drop-shadow-2xl">
           Learn about NASA PACE SATELLITE
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl">

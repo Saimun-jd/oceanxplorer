@@ -36,10 +36,10 @@ const Navbar = () => {
           </button>
 
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink to="/paceguide" className="text-white text-xl">About PACE</NavLink>
-            <NavLink to="/choosescene" className="text-white text-xl">Ecosystem</NavLink>
-            <NavLink to="/globe" className="text-white text-xl">Globe</NavLink>
+            <NavLink to="/insight" className="text-white text-xl">INSIGHT</NavLink>
+            <NavLink to="/globe" className="text-white text-xl">EARTH</NavLink>
             <NavLink to="https://pace.oceansciences.org/news.htm" className="text-white text-xl">NEWS AND UPDATES</NavLink>
+            <NavLink to="/choosescene" className="text-white text-xl">ECOSYSTEM</NavLink>
             <NavLink to="/game" className="text-white text-xl">GAMES</NavLink>
             <NavLink to="/facts" className="text-white text-xl">FACTS</NavLink>
             <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1">
@@ -51,10 +51,10 @@ const Navbar = () => {
 
         {isOpen && (
           <div className="md:hidden mt-4">
-            <NavLink to="/paceguide" className="block text-white text-xl py-2">PACE GUIDE</NavLink>
-            <NavLink to="/exploreocean" className="block text-white text-xl py-2">Ecosystem</NavLink>
-            <NavLink to="/globe" className="block text-white text-xl py-2">GLOBE</NavLink>
+            <NavLink to="/insight" className="block text-white text-xl py-2">INSIGHT</NavLink>
+            <NavLink to="/globe" className="block text-white text-xl py-2">EARTH</NavLink>
             <NavLink to="https://pace.oceansciences.org/news.htm" className="block text-white text-xl py-2">NEWS AND UPDATES</NavLink>
+            <NavLink to="/exploreocean" className="block text-white text-xl py-2">ECOSYSTEM</NavLink>
             <NavLink to="https://pace.oceansciences.org/aerosol_quiz.htm" className="block text-white text-xl py-2">GAMES</NavLink>
             <NavLink to="/facts" className="block text-white text-xl py-2">FACTS</NavLink>
             <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1 mt-2">

@@ -8,7 +8,9 @@ export default {
     extend: {
       fontFamily: {
         nerkoone: ["Nerko One", "cursive"],
-        newamsterdam: ["New Amsterdam", "sans-serif"]
+        newamsterdam: ["New Amsterdam", "sans-serif"],
+        stylish: ["Stylish", "serif"],
+        martian: ["Martian Mono", "monospace"]
       }
     },
   },

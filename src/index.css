@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 .button-primary {
   background: linear-gradient(
       180deg,
@@ -112,6 +116,4 @@
 
 
 
-html {
-  scroll-behavior: smooth;
-}
+

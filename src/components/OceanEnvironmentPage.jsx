@@ -1,78 +1,191 @@
-import React from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
-const OceanEnvironmentPage = () => {
-	const navigate = useNavigate();
+// Custom hook for intersection observer
+const useIntersectionObserver = (callback, threshold = 0.5) => {
+	const observer = useMemo(
+		() =>
+			new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							callback(entry);
+						}
+					});
+				},
+				{ threshold }
+			),
+		[callback, threshold]
+	);
 
-	const goToNextPage = () => {
-		navigate("/choosescene");
-	};
+	const observe = useCallback(
+		(element) => {
+			if (element) observer.observe(element);
+		},
+		[observer]
+	);
+
+	return observe;
+};
+
+// Background component
+const Background = ({ imageUrl }) => (
+	<motion.div
+		initial={{ opacity: 0 }}
+		animate={{ opacity: 1 }}
+		exit={{ opacity: 0 }}
+		transition={{ duration: 2, ease: "easeInOut" }}
+		className="fixed inset-0 bg-cover bg-center z-0"
+		style={{
+			backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${imageUrl})`,
+		}}
+	/>
+);
+
+// Section component
+const Section = ({ id, content, setActiveSection }) => {
+	const observe = useIntersectionObserver((entry) =>
+		setActiveSection(parseInt(entry.target.id.split("section")[1]) - 1)
+	);
 
 	return (
-		<div className="relative min-h-screen bg-blue-200">
-			<div className="p-8 pb-20">
-				{" "}
-				{/* Added bottom padding to prevent content from being hidden behind the button */}
-				<h1 className="text-4xl font-bold text-center text-blue-800 mb-12">
-					Understanding Ocean Environment
-				</h1>
-				<div className="container mx-auto flex flex-col md:flex-row items-start justify-between">
-					<div className="md:w-1/2 mb-8 md:mb-0">
-						<img
-							src="/ocean.jpg"
-							alt="Phytoplankton"
-							className="rounded-lg shadow-lg w-full"
-						/>
-					</div>
-
-					<div className="md:w-1/2 md:pl-8">
-						<h2 className="text-2xl font-semibold text-blue-700 mb-4 font-mono">
-							What is Ocean Environment?
-						</h2>
-						<p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed font-mono">
-							The ocean environment, covering more than 70% of the
-							Earth's surface, is a vast and dynamic ecosystem
-							that supports an incredible diversity of life. It is
-							characterized by its interconnected layers, from the
-							sunlit surface waters teeming with plankton and fish
-							to the deep, dark abyssal plains where strange and
-							unique organisms thrive in extreme conditions.
-							Oceans play a crucial role in regulating the
-							planet's climate by absorbing heat and carbon
-							dioxide, which helps to moderate global
-							temperatures. They are also the primary drivers of
-							the water cycle, with evaporation from the sea
-							surface contributing significantly to precipitation
-							around the world. The ocean environment is home to
-							complex habitats, including coral reefs, kelp
-							forests, seagrass meadows, and deep-sea hydrothermal
-							vents, each supporting a unique community of
-							organisms. These ecosystems provide essential
-							services, such as supporting fisheries that millions
-							of people rely on for food, maintaining
-							biodiversity, and generating oxygen through
-							photosynthesis by marine plants. However, the ocean
-							environment faces numerous threats from human
-							activities, including overfishing, pollution,
-							habitat destruction, and climate change, which are
-							causing ocean acidification, rising sea levels, and
-							warming waters. Protecting and preserving the health
-							of the ocean is critical not only for marine life
-							but also for the well-being of the planet and future
-							generations.
-						</p>
-					</div>
-				</div>
+		<motion.section
+			ref={observe}
+			id={`section${id}`}
+			initial={{ opacity: 0, y: 50 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 1, ease: "easeOut" }}
+			className="h-screen flex items-center justify-center p-8 relative z-10"
+		>
+			<div className="max-w-4xl mx-auto bg-white bg-opacity-80 p-8 rounded-lg">
+				{content}
 			</div>
-			<div className="fixed bottom-4 right-4 z-10">
+		</motion.section>
+	);
+};
+
+// Main component
+const OceanEnvironmentPage = () => {
+	const navigate = useNavigate();
+	const [activeSection, setActiveSection] = useState(0);
+
+	const goToNextPage = () => navigate("/insight");
+
+	const backgroundImages = ["/phyto1.jpg", "/phyto2.jpg", "/phyto3.jpg"];
+
+	const sectionContents = [
+		<>
+			<h1 className="text-3xl font-bold text-center text-blue-800 mb-8 font-serif">
+				Diving in the depth of Ocean
+			</h1>
+			<h2 className="text-3xl font-semibold text-blue-700 mb-6 font-sans">
+				Why is the Ocean Environment Important?
+			</h2>
+			<p className="text-lg md:text-xl text-gray-700 leading-relaxed font-sans">
+				The ocean covers more than 70% of Earth's surface and is a
+				cornerstone of our planet's climate, weather, and life-support
+				systems. It absorbs about 30% of the carbon dioxide produced by
+				human activities, regulates global temperature, drives weather
+				patterns, and provides a habitat for millions of species.
+				Additionally, the ocean plays a crucial role in supporting
+				economies, providing food, and sustaining the livelihoods of
+				billions of people.
+			</p>
+		</>,
+		<>
+			<h2 className="text-3xl font-semibold text-blue-700 mb-6 font-sans">
+				What Kind of Ocean Data is PACE Collecting?
+			</h2>
+			<p className="text-lg md:text-xl text-gray-700 leading-relaxed font-sans">
+				<span className="font-bold text-blue-500">
+					Phytoplankton and Ocean Productivity:
+				</span>{" "}
+				<br />
+				PACE measures phytoplankton concentration to assess ocean health
+				and marine life impacts.
+				<br />
+				<span className="font-bold text-blue-500">
+					Harmful Algal Blooms(HABs):
+				</span>{" "}
+				<br />
+				PACE detects harmful algal blooms early, protecting coastal
+				communities and ecosystems.
+				<br />
+				<span className="font-bold text-blue-500">
+					Ocean Carbon Cycle:
+				</span>{" "}
+				<br />
+				PACE tracks carbon absorption in oceans, helping predict and
+				mitigate climate change effects.
+				<br />
+				<span className="font-bold text-blue-500">
+					Sediment and Pollution Monitoring:
+				</span>{" "}
+				<br />
+				PACE identifies suspended sediments and pollutants to monitor
+				and protect marine environments.
+				<br />
+				<span className="font-bold text-blue-500">
+					Sea Surface Temperature and Ocean-Atmosphere Interaction:
+				</span>{" "}
+				<br />
+				PACE analyzes ocean color and temperature to understand climate
+				patterns and ocean-atmosphere dynamics.
+			</p>
+		</>,
+		<>
+			<h2 className="text-3xl font-semibold text-blue-700 mb-6 font-sans">
+				The Impact of Ocean Data from PACE
+			</h2>
+			<ul className="font-semibold font-martian">
+				<li>1. Protecting Marine Ecosystems</li>
+				<li>2. Combating Climate Change</li>
+				<li>3. Improving Disaster Preparedness</li>
+				<li>4. Enhancing Global Climate Models</li>
+				<li>5. Supporting Sustainable Fisheries Management</li>
+			</ul>
+		</>,
+	];
+
+	return (
+		<div className="relative">
+			<AnimatePresence>
+				<Background
+					key={activeSection}
+					imageUrl={backgroundImages[activeSection]}
+				/>
+			</AnimatePresence>
+
+			{sectionContents.map((content, index) => (
+				<Section
+					key={index}
+					id={index + 1}
+					content={content}
+					setActiveSection={setActiveSection}
+				/>
+			))}
+
+			<motion.div
+				className="fixed bottom-4 right-4 z-20"
+				whileHover={{ scale: 1.1 }}
+				whileTap={{ scale: 0.9 }}
+			>
 				<button
-					className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200"
+					className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200 flex items-center"
 					onClick={goToNextPage}
 					aria-label="Go to next page"
 				>
-					<ArrowForwardIcon />
+					<span className="mr-2">Next</span>
+					<ArrowRight className="h-5 w-5" />
 				</button>
+			</motion.div>
+
+			<div className="fixed top-4 right-4 z-20">
+				<p className="text-white bg-black bg-opacity-50 px-3 py-1 rounded">
+					Section {activeSection + 1} of {sectionContents.length}
+				</p>
 			</div>
 		</div>
 	);
