@@ -19,7 +19,7 @@ const Navbar = () => {
   }, []);
 
   const navbarClass = `fixed top-0 left-0 right-0 z-50 p-4 ${
-    isMobile ? 'bg-gradient-to-br from-purple-900 to-blue-900' : 'bg-transparent'
+    isMobile ? 'tit1' : 'bg-transparent'
   }`;
 
   return (

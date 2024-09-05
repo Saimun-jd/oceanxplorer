@@ -47,8 +47,8 @@ const HeroContent = () => {
         variants={slideInFromLeft(0.6)}
         className="w-full text-white mb-8 md:mb-0"
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 leading-tight drop-shadow-2xl">
-          Learn about NASA PACE SATELLITE
+        <h1 className="heading text-3xl font-inter sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 leading-tight drop-shadow-2xl">
+          Learn about NASA <span className="ring-2 rounded-full p-2 ring-inset ring-green-500">P</span><span className="ring-2 rounded-full p-2 ring-inset ring-blue-500">A</span><span className="ring-2 rounded-full p-2 ring-inset ring-cyan-500">C</span><span className="ring-2 rounded-full p-2 ring-inset ring-teal-500">E</span> SATELLITE
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl">
           98.3 minutes at an altitude of 676.5 km
@@ -60,10 +60,12 @@ const HeroContent = () => {
           variants={slideInFromLeft(0.8)}
           className="flex flex-col items-start mb-8 md:mb-0 md:mr-8 lg:mr-20 w-full md:w-auto"
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-4 text-white bg-black bg-opacity-60 rounded-full p-4">
+          <h2 className="tit1 text-xl sm:text-2xl md:text-3xl font-inter lg:text-4xl mb-4 text-white bg-black bg-opacity-60 rounded-full p-4"
+          
+          >
             {cards[currentCard].title}
           </h2>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white bg-black bg-opacity-60 rounded-full p-4 mb-8">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-inter text-white rounded-full p-4 mb-8">
             {cards[currentCard].description}
           </p>
           <motion.div

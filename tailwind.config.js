@@ -10,7 +10,8 @@ export default {
         nerkoone: ["Nerko One", "cursive"],
         newamsterdam: ["New Amsterdam", "sans-serif"],
         stylish: ["Stylish", "serif"],
-        martian: ["Martian Mono", "monospace"]
+        martian: ["Martian Mono", "monospace"],
+        inter: ["Inter", "sans-serif"]
       }
     },
   },
