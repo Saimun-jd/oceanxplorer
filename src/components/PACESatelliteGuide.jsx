@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ArrowForward } from "@mui/icons-material";
+import { useSwipeable } from "react-swipeable";
+import useCheckMobileScreen from "../hooks/useCheckMobileScreen";
 
 const satelliteSteps = [
 	{
@@ -38,15 +40,20 @@ const satelliteSteps = [
 const PACESatelliteGuide = () => {
 	const [currentCard, setCurrentCard] = useState(0);
 	const [direction, setDirection] = useState(0);
+	
 	const videoRef = useRef(null);
 
 	const navigate = useNavigate();
 
+	
+
+	const isMobile = useCheckMobileScreen();
+
 	const handleOnloadMetaData = () => {
-		if(videoRef.current) {
+		if (videoRef.current) {
 			videoRef.current.playbackRate = 2;
 		}
-	}
+	};
 
 	const goToNextPage = () => {
 		navigate("/phytoplankton");
@@ -63,6 +70,13 @@ const PACESatelliteGuide = () => {
 			(prev) => (prev - 1 + satelliteSteps.length) % satelliteSteps.length
 		);
 	};
+
+	const swipHandlers = useSwipeable({
+		onSwipedLeft: () => nextCard(),
+		onSwipedRight: () => prevCard(),
+		preventDefaultTouchmoveEvent: true,
+		trackMouse: true,
+	});
 
 	const cardVariants = {
 		enter: (direction) => ({
@@ -89,7 +103,7 @@ const PACESatelliteGuide = () => {
 					Journey of NASA's PACE Satellite
 				</h1>
 			</div>
-			<div className="relative max-w-6xl mx-auto h-[600px] sm:h-[700px] md:h-[800px]">
+			<div className="relative max-w-6xl mx-auto h-[600px] sm:h-[700px] md:h-[800px]" {...swipHandlers}>
 				<AnimatePresence initial={false} custom={direction}>
 					<motion.div
 						key={currentCard}
@@ -140,20 +154,20 @@ const PACESatelliteGuide = () => {
 				</AnimatePresence>
 
 				{/* Previous Button */}
-				<button
+				{!isMobile && <button
 					onClick={prevCard}
 					className="absolute bottom-4 left-4 bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-colors z-10"
 				>
 					<ChevronRight className="w-4 h-4 transform rotate-180" />
-				</button>
+				</button>}
 
 				{/* Next Button */}
-				<button
+				{!isMobile && <button
 					onClick={nextCard}
 					className="absolute bottom-4 right-4 bg-blue-500 p-2 rounded-full text-white hover:bg-blue-600 transition-colors z-10"
 				>
 					<ChevronRight className="w-4 h-4" />
-				</button>
+				</button>}
 
 				{/* Indicators */}
 				<div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
@@ -175,7 +189,7 @@ const PACESatelliteGuide = () => {
 				onClick={goToNextPage}
 			>
 				<ArrowForward className="w-5 h-5 sm:w-6 sm:h-6" />
-				<span className="ml-2 text-sm sm:text-base hidden sm:inline">
+				<span className={`ml-2 text-sm sm:text-base hidden sm:inline`}>
 					Explore
 				</span>
 			</button>
