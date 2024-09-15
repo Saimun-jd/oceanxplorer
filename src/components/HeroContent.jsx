@@ -99,6 +99,7 @@ const HeroContent = () => {
                   <img
                     src={card.image}
                     alt={card.title}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>
