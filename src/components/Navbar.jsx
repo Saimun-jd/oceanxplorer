@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Menu, X } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import SearchComponent from './SearchComponent';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,10 +43,7 @@ const Navbar = () => {
             <NavLink to="/choosescene" className="text-white text-xl">ECOSYSTEM</NavLink>
             <NavLink to="/game" className="text-white text-xl">GAMES</NavLink>
             <NavLink to="/facts" className="text-white text-xl">FACTS</NavLink>
-            <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1">
-              <input type="text" value={searchVal} onChange={(e) => setSearchVal(e.target.value)} className="bg-transparent text-white placeholder-white outline-none" />
-              <Search className="text-white ml-2" size={20} />
-            </div>
+            <SearchComponent onSearch={() => {}}/>
           </div>
         </div>
 
