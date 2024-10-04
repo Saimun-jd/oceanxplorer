@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft } from "lucide-react";
 import useInView from "../hooks/useInView";
 
 // Background component
@@ -43,6 +43,10 @@ const Section = ({ id, content, onInView }) => {
 const OceanEnvironmentPage = () => {
 	const navigate = useNavigate();
 	const [activeSection, setActiveSection] = useState(0);
+
+	const goBack = () => {
+		navigate("/");
+	};
 
 	const goToNextPage = () => navigate("/insight");
 
@@ -159,6 +163,15 @@ const OceanEnvironmentPage = () => {
 				<p className="text-white bg-black bg-opacity-50 px-3 py-1 rounded">
 					Section {activeSection + 1} of {sectionContents.length}
 				</p>
+			</div>
+			<div className="fixed bottom-4 left-4 z-10">
+				<button
+					onClick={goBack}
+					className="px-4 py-2 bg-green-500 text-white rounded"
+				>
+					<ChevronLeft />
+					<span>Back</span>
+				</button>
 			</div>
 		</div>
 	);

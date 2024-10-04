@@ -25,6 +25,7 @@ const Section = ({ id, content, onInView }) => {
 	// );
 	const sectionRef = useRef(null);
 	useInView(sectionRef, onInView);
+	const navigate = useNavigate();
 
 	return (
 		<motion.section
@@ -45,6 +46,7 @@ const Section = ({ id, content, onInView }) => {
 // Main component
 const CloudPage = () => {
 	const navigate = useNavigate();
+	
 	const [activeSection, setActiveSection] = useState(0);
 
 	const goToNextPage = () => navigate("/ocean-environment");
