@@ -1,7 +1,6 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, Droplet, Info, MapPin, Thermometer } from "lucide-react";
+import { ChevronLeft, CircleX, Droplet, Info, MapPin, Thermometer } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -59,6 +58,7 @@ const ChlorophyllGlobe = () => {
   const mountRef = useRef(null);
   const globeRef = useRef(null);
   const rendererRef = useRef(null);
+  const controlsRef = useRef(null);
   const [popupInfo, setPopupInfo] = useState({
     show: false,
     text: "",
@@ -68,6 +68,9 @@ const ChlorophyllGlobe = () => {
   const [modalInfo, setModalInfo] = useState(null);
   const [concentrationData, setConcentrationData] = useState(null);
   const [tempData, setTempData] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -173,9 +176,11 @@ const ChlorophyllGlobe = () => {
 
     // Add orbit controls
     const controls = new OrbitControls(camera, renderer.domElement);
+    controlsRef.current = controls;
     controls.enableDamping = true;
     controls.dampingFactor = 0.25;
     controls.enableZoom = true;
+    controls.enablePan = false;
 
     // Create starfield background
     const starGeometry = new THREE.BufferGeometry();
@@ -200,13 +205,16 @@ const ChlorophyllGlobe = () => {
     const starField = new THREE.Points(starGeometry, starMaterial);
     scene.add(starField);
 
-    // Raycaster for mouse interaction
+    // Raycaster for mouse/touch interaction
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
-    const handleMouseMove = (event) => {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    const handleInteraction = (event) => {
+      const clientX = event.clientX || (event.touches && event.touches[0].clientX);
+      const clientY = event.clientY || (event.touches && event.touches[0].clientY);
+
+      mouse.x = (clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(clientY / window.innerHeight) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObject(globe);
@@ -225,8 +233,8 @@ const ChlorophyllGlobe = () => {
           text: `Lat: ${lat.toFixed(2)}°, Lon: ${lon.toFixed(2)}°
 Chlorophyll: ${concentration} mg/m^3
 Temperature: ${temperature}°C`,
-          x: event.clientX,
-          y: event.clientY,
+          x: clientX,
+          y: clientY,
         });
       } else {
         setPopupInfo({ show: false, text: "", x: 0, y: 0 });
@@ -234,29 +242,48 @@ Temperature: ${temperature}°C`,
     };
 
     const handleClick = (event) => {
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObject(globe);
+      if (!isDragging) {
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObject(globe);
 
-      if (intersects.length > 0) {
-        const intersectionPoint = intersects[0].point.clone().normalize();
-        const lat = 90 - Math.acos(intersectionPoint.y) * (180 / Math.PI);
-        let lon = Math.atan2(intersectionPoint.x, intersectionPoint.z) * (180 / Math.PI);
-        lon = ((lon + 180) % 360) - 180;
+        if (intersects.length > 0) {
+          const intersectionPoint = intersects[0].point.clone().normalize();
+          const lat = 90 - Math.acos(intersectionPoint.y) * (180 / Math.PI);
+          let lon = Math.atan2(intersectionPoint.x, intersectionPoint.z) * (180 / Math.PI);
+          lon = ((lon + 180) % 360) - 180;
 
-        const concentration = getConcentration(lat, lon);
-        const temperature = getTemp(lat, lon);
+          const concentration = getConcentration(lat, lon);
+          const temperature = getTemp(lat, lon);
 
-        setModalInfo({
-          latitude: lat.toFixed(2),
-          longitude: lon.toFixed(2),
-          concentration,
-          temperature,
-        });
+          setModalInfo({
+            latitude: lat.toFixed(2),
+            longitude: lon.toFixed(2),
+            concentration,
+            temperature,
+          });
+        }
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("click", handleClick);
+    const handleTouchStart = () => {
+      setIsDragging(false);
+    };
+
+    const handleTouchMove = () => {
+      setIsDragging(true);
+    };
+
+    const handleTouchEnd = (event) => {
+      if (!isDragging) {
+        handleClick(event);
+      }
+    };
+
+    renderer.domElement.addEventListener("mousemove", handleInteraction);
+    renderer.domElement.addEventListener("click", handleClick);
+    renderer.domElement.addEventListener("touchstart", handleTouchStart);
+    renderer.domElement.addEventListener("touchmove", handleTouchMove);
+    renderer.domElement.addEventListener("touchend", handleTouchEnd);
 
     // Animation loop
     const animate = () => {
@@ -277,8 +304,11 @@ Temperature: ${temperature}°C`,
     // Cleanup
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("click", handleClick);
+      renderer.domElement.removeEventListener("mousemove", handleInteraction);
+      renderer.domElement.removeEventListener("click", handleClick);
+      renderer.domElement.removeEventListener("touchstart", handleTouchStart);
+      renderer.domElement.removeEventListener("touchmove", handleTouchMove);
+      renderer.domElement.removeEventListener("touchend", handleTouchEnd);
 
       if (rendererRef.current) {
         rendererRef.current.dispose();
@@ -293,7 +323,7 @@ Temperature: ${temperature}°C`,
         mountRef.current.removeChild(renderer.domElement);
       }
     };
-  }, [concentrationData, tempData]);
+  }, [concentrationData, tempData, isDragging]);
 
   const getConcentration = (lat, lon) => {
     if (!concentrationData) return "Loading...";
@@ -356,7 +386,10 @@ Temperature: ${temperature}°C`,
       <Modal isOpen={!!modalInfo} onClose={() => setModalInfo(null)}>
         {modalInfo && (
           <div className="p-6">
+            <div className="flex flex-row justify-between items-center">
             <h2 className="text-2xl font-bold mb-4 text-blue-600">Location Data</h2>
+            <button onClick={() => {setModalInfo(null)}}><CircleX/></button>
+            </div>
             <div className="space-y-4">
               <DataItem
                 icon={<MapPin className="text-red-500" />}

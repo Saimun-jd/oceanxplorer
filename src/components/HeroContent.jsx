@@ -194,13 +194,13 @@ const HeroContent = () => {
 				className="flex justify-center items-baseline space-x-4 sm:space-x-4 md:space-x-8 space-y-4 sm:space-y-0 text-white mt-8"
 			>
 				<NavLink
-					to="https://pace.oceansciences.org/data.htm"
+					to="https://pace.oceansciences.org/news.htm"
 					className="text-base sm:text-lg md:text-xl"
 				>
-					Access pace data
+					News and updates
 				</NavLink>
 				<NavLink
-					to="/aboutus"
+					to="https://www.spaceappschallenge.org/nasa-space-apps-2024/find-a-team/blusentry/"
 					className="text-base sm:text-lg md:text-xl"
 				>
 					About US

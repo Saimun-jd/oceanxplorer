@@ -27,7 +27,7 @@ const Navbar = () => {
     <nav className={navbarClass}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
-          <NavLink to="/" className="text-white text-xl font-bold">HOME</NavLink>
+          <NavLink to="/" className="text-white text-xl font-bold">Dashboard</NavLink>
           
           <button 
             onClick={() => setIsOpen(!isOpen)} 
@@ -39,7 +39,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <NavLink to="/insight" className="text-white text-xl">INSIGHT</NavLink>
             <NavLink to="/globe" className="text-white text-xl">EARTH</NavLink>
-            <NavLink to="https://pace.oceansciences.org/news.htm" className="text-white text-xl">NEWS AND UPDATES</NavLink>
+            <NavLink to="/access_data" className="text-white text-xl">PACE DATA</NavLink>
             <NavLink to="/choosescene" className="text-white text-xl">ECOSYSTEM</NavLink>
             <NavLink to="/game" className="text-white text-xl">GAMES</NavLink>
             <NavLink to="/facts" className="text-white text-xl">FACTS</NavLink>
@@ -51,7 +51,7 @@ const Navbar = () => {
           <div className="md:hidden mt-4">
             <NavLink to="/insight" className="block text-white text-xl py-2">INSIGHT</NavLink>
             <NavLink to="/globe" className="block text-white text-xl py-2">EARTH</NavLink>
-            <NavLink to="https://pace.oceansciences.org/news.htm" className="block text-white text-xl py-2">NEWS AND UPDATES</NavLink>
+            <NavLink to="/access_data" className="block text-white text-xl py-2">Access PACE Data</NavLink>
             <NavLink to="/exploreocean" className="block text-white text-xl py-2">ECOSYSTEM</NavLink>
             <NavLink to="/game" className="block text-white text-xl py-2">GAMES</NavLink>
             <NavLink to="/facts" className="block text-white text-xl py-2">FACTS</NavLink>

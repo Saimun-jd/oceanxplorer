@@ -16,6 +16,7 @@ import UnhealthyOcean from "./components/UnhealthyOcean";
 import Game from "./components/Game";
 import PaceInsight from "./components/InsightPage";
 import ScrollToTop from "./components/ScrollToTop";
+import DataAccess from "./components/DataAccess";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <Route path="/choosescene" element={<SceneSelector/>}/>
         <Route path="/game" element={<Game/>}/>
         <Route path="/insight" element={<PaceInsight/>}/>
+        <Route path="/access_data" element={<DataAccess/>}/>
       </Routes>
     </Router>
   );
