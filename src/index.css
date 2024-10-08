@@ -15,7 +15,7 @@ html {
 
 @font-face {
 	font-family: "space_explorer";
-	src: url("fonts/SPACE_EXPLORER.otf") format("opentype");
+	src: url("/fonts/SPACE_EXPLORER.otf") format("opentype");
 	font-weight: normal;
 	font-style: normal;
 	font-size: small;
