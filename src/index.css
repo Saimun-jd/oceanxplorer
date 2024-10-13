@@ -1,4 +1,22 @@
 @tailwind base;
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #000;
+}
+*::-webkit-scrollbar {
+	width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+	background: #000;
+	border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #000;
+	border-radius: 14px;
+	border: 3px solid #fff;
+}
 @tailwind components;
 @tailwind utilities;
 
@@ -26,25 +44,24 @@ html {
 }
 
 .tit1 {
-  background-image: linear-gradient(
-    to right top,
-    rgba(209, 107, 165, 0.4),
-    rgba(199, 119, 185, 0.4),
-    rgba(186, 131, 202, 0.4),
-    rgba(170, 143, 216, 0.4),
-    rgba(154, 154, 225, 0.4),
-    rgba(138, 167, 236, 0.4),
-    rgba(121, 179, 244, 0.4),
-    rgba(105, 191, 248, 0.4),
-    rgba(82, 207, 254, 0.4),
-    rgba(65, 223, 255, 0.4),
-    rgba(70, 238, 250, 0.4),
-    rgba(95, 251, 241, 0.4)
-  );
-  backdrop-filter: blur(5px); /* Adds a blur effect to the background */
-  -webkit-backdrop-filter: blur(5px); /* For Safari support */
+	background-image: linear-gradient(
+		to right top,
+		rgba(209, 107, 165, 0.4),
+		rgba(199, 119, 185, 0.4),
+		rgba(186, 131, 202, 0.4),
+		rgba(170, 143, 216, 0.4),
+		rgba(154, 154, 225, 0.4),
+		rgba(138, 167, 236, 0.4),
+		rgba(121, 179, 244, 0.4),
+		rgba(105, 191, 248, 0.4),
+		rgba(82, 207, 254, 0.4),
+		rgba(65, 223, 255, 0.4),
+		rgba(70, 238, 250, 0.4),
+		rgba(95, 251, 241, 0.4)
+	);
+	backdrop-filter: blur(5px); /* Adds a blur effect to the background */
+	-webkit-backdrop-filter: blur(5px); /* For Safari support */
 }
-
 
 .button-primary {
 	background: linear-gradient(

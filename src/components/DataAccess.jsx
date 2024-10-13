@@ -1,188 +1,255 @@
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Download, FileText, Image, FileSpreadsheet } from 'lucide-react';
+import React, { useState } from 'react';
+import { Download, FileSpreadsheet, ChevronDown, ChevronUp, Moon, Star, Sun, Info, BarChart2, Clock } from 'lucide-react';
 
-const sections = [
-    {
-        name: 'Chlorophyll data',
-        icon: <FileText />,
-        files: [
-            { name: 'day20151231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20151232.csv', url: '/files/presentation.pptx' },
-            { name: 'day20151531.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20451232.csv', url: '/files/presentation.pptx' },
-            { name: 'day20141231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20157232.csv', url: '/files/presentation.pptx' },
-            { name: 'day201554231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20156745232.csv', url: '/files/presentation.pptx' },
-            { name: 'day202341231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day201345232.csv', url: '/files/presentation.pptx' },
-            { name: 'day201445231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20154532.csv', url: '/files/presentation.pptx' },
-            { name: 'day20151231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20151232.csv', url: '/files/presentation.pptx' },
-            { name: 'day20151531.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20451232.csv', url: '/files/presentation.pptx' },
-            { name: 'day20141231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20157232.csv', url: '/files/presentation.pptx' },
-            { name: 'day201554231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20156745232.csv', url: '/files/presentation.pptx' },
-            { name: 'day202341231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day201345232.csv', url: '/files/presentation.pptx' },
-            { name: 'day201445231.R2017.csv', url: '/files/report.pdf' },
-            { name: 'day20154532.csv', url: '/files/presentation.pptx' },
-        ],
-    },
-    {
-        name: 'Ocean Color',
-        icon: <Image />,
-        files: [
-            { name: 'day20151231.R2017.csv', url: '/files/logo.png' },
-            { name: 'day20151232.R2017.csv', url: '/files/banner.jpg' },
-        ],
-    },
-    {
-        name: 'Aerosol depth',
-        icon: <FileSpreadsheet />,
-        files: [
-            { name: 'day20151231.R2017.csv', url: '/files/budget.xlsx' },
-            { name: 'day20151232.R2017.csv', url: '/files/data.csv' },
-        ],
-    },
-    {
-        name: 'Ocean Temperature',
-        icon: <FileSpreadsheet />,
-        files: [
-            { name: 'day20151230.R2017.csv', url: '/' },
-            { name: 'day20151231.R2017.csv', url: '/files/data.csv' },
-            { name: 'day20151233.R2017.csv', url: '/files/data.csv' },
-        ],
-    },
-    {
-        name: 'Want to explore more?',
-        icon: <FileSpreadsheet />,
-        files: [
-            { name: 'SeaDas', url: '/' },
-            { name: 'Geovanni', url: '/files/data.csv' },
-            { name: 'Matlab', url: '/files/data.csv' },
-        ],
-    },
+const categories = [
+  {
+    id: 1,
+    name: 'Mission Data',
+    icon: <Moon className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Mars Rover Telemetry', size: '2.3 MB', downloads: 1234, lastUpdated: '2024-03-15' },
+      { id: 2, name: 'ISS Experiments Log', size: '2.5 MB', downloads: 987, lastUpdated: '2024-03-10' },
+      { id: 3, name: 'Artemis Mission Plan', size: '4.1 MB', downloads: 2345, lastUpdated: '2024-03-05' },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Astronomical Observations',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Exoplanet Catalog 2024', size: '1.8 MB', downloads: 3456, lastUpdated: '2024-03-01' },
+      { id: 2, name: 'Galaxy Cluster Survey', size: '3.2 MB', downloads: 1765, lastUpdated: '2024-02-28' },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Earth Science',
+    icon: <Sun className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Global Climate Data', size: '1.5 MB', downloads: 5678, lastUpdated: '2024-02-25' },
+      { id: 2, name: 'Vegetation Index', size: '0.8 MB', downloads: 3210, lastUpdated: '2024-02-20' },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Space Technology',
+    icon: <Moon className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Satellite Propulsion Systems', size: '3.7 MB', downloads: 2100, lastUpdated: '2024-02-18' },
+      { id: 2, name: 'Advanced Materials Research', size: '2.9 MB', downloads: 1890, lastUpdated: '2024-02-15' },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Astrophysics',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Black Hole Simulations', size: '5.2 MB', downloads: 4321, lastUpdated: '2024-02-10' },
+      { id: 2, name: 'Cosmic Microwave Background Data', size: '4.8 MB', downloads: 3987, lastUpdated: '2024-02-05' },
+    ],
+  },
+  {
+    id: 6,
+    name: 'Astrophysics',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Black Hole Simulations', size: '5.2 MB', downloads: 4321, lastUpdated: '2024-02-10' },
+      { id: 2, name: 'Cosmic Microwave Background Data', size: '4.8 MB', downloads: 3987, lastUpdated: '2024-02-05' },
+    ],
+  },
+  {
+    id: 7,
+    name: 'Astrophysics',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Black Hole Simulations', size: '5.2 MB', downloads: 4321, lastUpdated: '2024-02-10' },
+      { id: 2, name: 'Cosmic Microwave Background Data', size: '4.8 MB', downloads: 3987, lastUpdated: '2024-02-05' },
+    ],
+  },
+  {
+    id: 8,
+    name: 'Astrophysics',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Black Hole Simulations', size: '5.2 MB', downloads: 4321, lastUpdated: '2024-02-10' },
+      { id: 2, name: 'Cosmic Microwave Background Data', size: '4.8 MB', downloads: 3987, lastUpdated: '2024-02-05' },
+    ],
+  },
+  {
+    id: 9,
+    name: 'Astrophysics',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Black Hole Simulations', size: '5.2 MB', downloads: 4321, lastUpdated: '2024-02-10' },
+      { id: 2, name: 'Cosmic Microwave Background Data', size: '4.8 MB', downloads: 3987, lastUpdated: '2024-02-05' },
+    ],
+  },
+  {
+    id: 10,
+    name: 'Astrophysics',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Black Hole Simulations', size: '5.2 MB', downloads: 4321, lastUpdated: '2024-02-10' },
+      { id: 2, name: 'Cosmic Microwave Background Data', size: '4.8 MB', downloads: 3987, lastUpdated: '2024-02-05' },
+    ],
+  },{
+    id: 11,
+    name: 'Astrophysics',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Black Hole Simulations', size: '5.2 MB', downloads: 4321, lastUpdated: '2024-02-10' },
+      { id: 2, name: 'Cosmic Microwave Background Data', size: '4.8 MB', downloads: 3987, lastUpdated: '2024-02-05' },
+    ],
+  },
+  {
+    id: 12,
+    name: 'Astrophysics',
+    icon: <Star className="h-6 w-6 md:h-8 md:w-8" />,
+    files: [
+      { id: 1, name: 'Black Hole Simulations', size: '5.2 MB', downloads: 4321, lastUpdated: '2024-02-10' },
+      { id: 2, name: 'Cosmic Microwave Background Data', size: '4.8 MB', downloads: 3987, lastUpdated: '2024-02-05' },
+    ],
+  },
 ];
 
 const DataAccess = () => {
-    const [openSection, setOpenSection] = useState(null);
+  const [expandedCategory, setExpandedCategory] = useState(null);
 
-    const toggleSection = (index) => {
-        setOpenSection(openSection === index ? null : index);
-    };
-
-    const handleDownload = (url, fileName) => {
-        console.log(`Downloading ${fileName} from ${url}`);
-    };
-
-    return (
-        <div className='relative flex flex-col w-full min-h-screen'>
-            <div
-                className='absolute inset-0 bg-cover bg-center transition-all duration-500 ease-in-out blur-md'
-                style={{
-                    background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/aisatellite.webp")',
-                    
-                }}
-            ></div>
-            <div className="relative min-h-screen py-12 px-4 sm:px-6 lg:px-8 z-10">
-                <div className="max-w-3xl mx-auto">
-                    <motion.h1
-                        className="text-4xl font-extrabold text-center text-green-600 mb-8"
-                        initial={{ opacity: 0, y: -50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        PACE Simplified
-                    </motion.h1>
-                    <motion.p 
-                        className="text-md font-semibold text-center text-white mb-8"
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        Our platform simplifies access to PACE satellite data by enabling easy conversion from netCDF to CSV, allowing students to work with real world data in familliar formats like excel or python for their research and projects.
-                    </motion.p>
-                    <div className='flex flex-col justify-center items-center'>
-
-                    <motion.div
-                        className="bg-white/90 shadow-xl rounded-lg overflow-hidden backdrop-blur-sm w-[400px] sm:w-[800px] md:w-[1200px]"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        {sections.map((section, index) => (
-                            <motion.div
-                                key={index}
-                                className="border-b border-gray-200 last:border-b-0"
-                                initial={false}
-                                animate={{ backgroundColor: openSection === index ? "#F3F4F6" : "rgba(255, 255, 255, 0.9)" }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <button
-                                    className="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none"
-                                    onClick={() => toggleSection(index)}
-                                >
-                                    <span className="flex items-center space-x-3">
-                                        <motion.span
-                                            className="text-indigo-500"
-                                            whileHover={{ scale: 1.1 }}
-                                            whileTap={{ scale: 0.9 }}
-                                        >
-                                            {section.icon}
-                                        </motion.span>
-                                        <span className="font-medium text-gray-800">{section.name}</span>
-                                    </span>
-                                    <motion.span
-                                        animate={{ rotate: openSection === index ? 180 : 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        <ChevronDown className="h-5 w-5 text-gray-500" />
-                                    </motion.span>
-                                </button>
-                                <AnimatePresence>
-                                    {openSection === index && (
-                                        <motion.ul
-                                            className="bg-gray-50/80 py-2"
-                                            initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: "auto" }}
-                                            exit={{ opacity: 0, height: 0 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            {section.files.map((file, fileIndex) => (
-                                                <motion.li
-                                                    key={fileIndex}
-                                                    className="px-6 py-2 flex items-center justify-between"
-                                                    initial={{ opacity: 0, x: -20 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ duration: 0.2, delay: fileIndex * 0.1 }}
-                                                >
-                                                    <span className="text-sm text-gray-700">{file.name}</span>
-                                                    <motion.button
-                                                        className="text-indigo-500 hover:text-indigo-700 focus:outline-none"
-                                                        onClick={() => handleDownload(file.url, file.name)}
-                                                        whileHover={{ scale: 1.1 }}
-                                                        whileTap={{ scale: 0.9 }}
-                                                    >
-                                                        <Download className="h-5 w-5" />
-                                                    </motion.button>
-                                                </motion.li>
-                                            ))}
-                                        </motion.ul>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-                    </div>
-                </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 flex flex-col">
+      <div className="flex-grow overflow-hidden flex flex-col">
+        {/* Top section with title and stats */}
+        <div className="p-4 sm:p-6 lg:p-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-center text-blue-300 mb-8 animate-pulse">
+            PACE Simplified
+          </h1>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="bg-gray-800 bg-opacity-80 rounded-lg p-4 flex items-center justify-between backdrop-filter backdrop-blur-lg">
+              <div className="flex items-center">
+                <BarChart2 className="h-8 w-8 text-blue-400 mr-3" />
+                <span className="text-gray-200">Total Downloads</span>
+              </div>
+              <span className="text-2xl font-bold text-blue-300">18,675</span>
             </div>
+            <div className="bg-gray-800 bg-opacity-80 rounded-lg p-4 flex items-center justify-between backdrop-filter backdrop-blur-lg">
+              <div className="flex items-center">
+                <FileSpreadsheet className="h-8 w-8 text-blue-400 mr-3" />
+                <span className="text-gray-200">Available Files</span>
+              </div>
+              <span className="text-2xl font-bold text-blue-300">{categories.reduce((acc, cat) => acc + cat.files.length, 0)}</span>
+            </div>
+            <div className="bg-gray-800 bg-opacity-80 rounded-lg p-4 flex items-center justify-between backdrop-filter backdrop-blur-lg">
+              <div className="flex items-center">
+                <Clock className="h-8 w-8 text-blue-400 mr-3" />
+                <span className="text-gray-200">Last Updated</span>
+              </div>
+              <span className="text-xl font-bold text-blue-300">2024-03-15</span>
+            </div>
+          </div>
         </div>
-    );
+
+        {/* Data archive section with border and scrolling */}
+        <div className="flex-grow px-4 sm:px-6 lg:px-8 pb-4 overflow-hidden">
+          <div className="max-w-4xl max-h-80 sm:max-h-96 md:max-h-[520px] mx-auto border-4 border-blue-500 rounded-lg overflow-hidden">
+            <div className="bg-gray-800 bg-opacity-80 p-4 backdrop-filter backdrop-blur-lg">
+              <h2 className="text-2xl font-bold text-blue-300 mb-4">Data Categories</h2>
+            </div>
+            <div className="max-h-[calc(100vh-400px)] overflow-y-auto">
+              {categories.map((category) => (
+                <div key={category.id} className="bg-gray-800 bg-opacity-80 shadow-lg overflow-hidden backdrop-filter backdrop-blur-lg transition-all duration-300 ease-in-out">
+                  <button 
+                    onClick={() => setExpandedCategory(expandedCategory === category.name ? null : category.name)}
+                    className="w-full px-4 py-3 md:px-6 md:py-4 bg-blue-900 bg-opacity-60 flex justify-between items-center hover:bg-blue-800 transition duration-150 ease-in-out"
+                  >
+                    <div className="flex items-center space-x-3 md:space-x-4">
+                      <div className="text-blue-300">
+                        {category.icon}
+                      </div>
+                      <h2 className="text-lg md:text-xl font-semibold text-blue-300">{category.name}</h2>
+                    </div>
+                    {expandedCategory === category.name ? (
+                      <ChevronUp className="h-5 w-5 md:h-6 md:w-6 text-blue-300" />
+                    ) : (
+                      <ChevronDown className="h-5 w-5 md:h-6 md:w-6 text-blue-300" />
+                    )}
+                  </button>
+                  {expandedCategory === category.name && (
+                    <ul className="divide-y divide-gray-700">
+                      {category.files.map((file) => (
+                        <li key={file.id} className="px-4 py-3 md:px-6 md:py-4 hover:bg-gray-700 transition duration-150 ease-in-out">
+                          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div className="flex items-center mb-2 md:mb-0">
+                              <FileSpreadsheet className="h-5 w-5 md:h-6 md:w-6 text-blue-400 mr-3" />
+                              <div>
+                                <p className="text-sm md:text-base font-medium text-gray-200">{file.name}</p>
+                                <p className="text-xs md:text-sm text-gray-400">{file.size}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between md:justify-end space-x-4">
+                              <div className="flex items-center space-x-1 text-gray-400">
+                                <BarChart2 className="h-4 w-4" />
+                                <span className="text-xs">{file.downloads}</span>
+                              </div>
+                              <div className="flex items-center space-x-1 text-gray-400">
+                                <Clock className="h-4 w-4" />
+                                <span className="text-xs">{file.lastUpdated}</span>
+                              </div>
+                              <button className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-600 text-blue-100 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 ease-in-out transform hover:scale-110">
+                                <Download className="h-4 w-4 md:h-5 md:w-5" />
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Static bottom section */}
+      <div className="bg-gray-800 bg-opacity-80 p-4 sm:p-6 lg:p-8 backdrop-filter backdrop-blur-lg mt-auto">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-xl font-semibold text-blue-300 mb-2 flex items-center">
+            <Info className="h-5 w-5 mr-2" />
+            About NASA Data Archives
+          </h3>
+          <p className="text-gray-300 text-sm md:text-base">
+            Our platform simplifies access to PACE satellite data by enabing easy conversion from netCDF and other complex data format to csv, allowing students to work with real world data in familiar formats like excel, python and matlab for their reaearch purpose and projects.
+          </p>
+        </div>
+      </div>
+
+      {/* Background stars */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        {[...Array(100)].map((_, i) => (
+          <div 
+            key={i} 
+            className="absolute bg-white rounded-full"
+            style={{
+              width: Math.random() * 3 + 1 + 'px',
+              height: Math.random() * 3 + 1 + 'px',
+              top: Math.random() * 100 + '%',
+              left: Math.random() * 100 + '%',
+              animation: `twinkle ${Math.random() * 5 + 5}s linear infinite`
+            }}
+          />
+        ))}
+      </div>
+      
+      <style>{`
+        @keyframes twinkle {
+          0% { opacity: 0; }
+          50% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+      `}</style>
+    </div>
+  );
 };
 
 export default DataAccess;
