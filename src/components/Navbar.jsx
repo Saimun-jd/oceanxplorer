@@ -43,6 +43,7 @@ const Navbar = () => {
             <NavLink to="/choosescene" className="text-white text-xl">ECOSYSTEM</NavLink>
             <NavLink to="/game" className="text-white text-xl">GAMES</NavLink>
             <NavLink to="/facts" className="text-white text-xl">FACTS</NavLink>
+            <NavLink to="/analyze" className="text-white text-xl">Analyze</NavLink>
             <SearchComponent onSearch={() => {}}/>
           </div>
         </div>
@@ -55,6 +56,7 @@ const Navbar = () => {
             <NavLink to="/exploreocean" className="block text-white text-xl py-2">ECOSYSTEM</NavLink>
             <NavLink to="/game" className="block text-white text-xl py-2">GAMES</NavLink>
             <NavLink to="/facts" className="block text-white text-xl py-2">FACTS</NavLink>
+            <NavLink to="/analyze" className="text-white text-xl">Analyze</NavLink>
             <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1 mt-2">
               <input type="text" value={searchVal} onChange={(e)=> setSearchVal(e.target.value)} className="bg-transparent text-white placeholder-white outline-none w-full" />
               <Search className="text-white ml-2" size={20} />

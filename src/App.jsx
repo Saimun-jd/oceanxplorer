@@ -17,6 +17,7 @@ import Game from "./components/Game";
 import PaceInsight from "./components/InsightPage";
 import ScrollToTop from "./components/ScrollToTop";
 import DataAccess from "./components/DataAccess";
+import ImageUpload from "./components/ImageUpload";
 
 function App() {
 
@@ -39,6 +40,8 @@ function App() {
         <Route path="/game" element={<Game/>}/>
         <Route path="/insight" element={<PaceInsight/>}/>
         <Route path="/access_data" element={<DataAccess/>}/>
+        <Route path="/analyze" element={<ImageUpload/>} />
+        <Route path="*" element={<div>Error this page was not found</div>}/>
       </Routes>
     </Router>
   );
